@@ -6,5 +6,4 @@ unset($_SESSION["s_id]);
 session_destroy();
 $data=[];
 print json_encode($data);
-header("Location:../index.php");
 ?>
