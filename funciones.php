@@ -17,7 +17,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
     $ciclos=$resultado->fetchAll(PDO::FETCH_ASSOC);
     
     //Traemos todos los Deportes
-    $consultaDeportes = "SELECT id, nombre FROM ciclos ORDER BY id";
+    $consultaDeportes = "SELECT id, nombre FROM deportes ORDER BY id";
     $resultadoDeportes=metodoGet($consultaDeportes);
     if($resultadoDeportes->rowCount() >= 1){
         $deportes = $resultadoDeportes->fetchAll(PDO::FETCH_ASSOC);
