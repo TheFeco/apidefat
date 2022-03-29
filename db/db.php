@@ -2,7 +2,7 @@
     $pdo=null;
     $host="localhost";
     $user="root";
-    $passw="";
+    $passw="t3cnolog14";
     $db="defat";
 
     function conectar(){
