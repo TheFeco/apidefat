@@ -1,12 +1,12 @@
 <?php
 //session_start();
 
-// include_once 'conexion.php';
-include 'db/db.php';
+include_once 'db/conexion.php';
+//include 'db/db.php';
 
 header('Access-Control-Allow-Origin: *');
-// $objeto = new Conexion();
-// $conexion = $objeto->Conectar();
+$objeto = new Conexion();
+$conexion = $objeto->Conectar();
 
 //recepción de datos enviados mediante POST desde ajax
 $usuario = (isset($_POST['usuario'])) ? $_POST['usuario'] : '';
@@ -16,10 +16,10 @@ $pass = md5($password); //encripto la clave enviada por el usuario para comparar
 
 $consulta = "SELECT id, id_rol, usuario, sn_actualizar FROM usuarios WHERE usuario='$usuario' AND password='$pass' ";
 
-// $resultado = $conexion->prepare($consulta);
-// $resultado->execute();
+$resultado = $conexion->prepare($consulta);
+$resultado->execute();
 
-$resultado=metodoGet($consulta); 
+//$resultado=metodoGet($consulta); 
 if($resultado->rowCount() >= 1){
     $data = $resultado->fetch(PDO::FETCH_ASSOC);
     $_SESSION["s_usuario"] = $usuario;
