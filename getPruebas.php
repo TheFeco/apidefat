@@ -4,8 +4,6 @@ include_once 'db/conexion.php';
 header('Access-Control-Allow-Origin: *');
 $objeto = new Conexion();
 $conexion = $objeto->Conectar();
-
-header('Access-Control-Allow-Origin: *');
 if($_SERVER['REQUEST_METHOD']=='GET'){
     if(isset($_GET['id'])){
         $id=$_GET['id'];
