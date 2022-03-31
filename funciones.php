@@ -55,8 +55,19 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
         echo $errors[2] . ", " . $errors[1] . " ," . $errors[0];
         $ramas=null;
     }
+    //Traemos todos los Municipios
+    $consultaMunicipios = "SELECT id, nombre FROM municipios ORDER BY id";
+    $resultadoMunicipios = $conexion->prepare($consultaMunicipios);
+    $resultadoMunicipios->execute();
+    if($resultadoMunicipios->rowCount() >= 1){
+        $municipios = $resultadoMunicipios->fetchAll(PDO::FETCH_ASSOC);
+    }else{
+        $errors = $resultadoMunicipios->errorInfo();
+        echo $errors[2] . ", " . $errors[1] . " ," . $errors[0];
+        $municipios=null;
+    }
     // 
-    $d = array('funciones' => $funciones, 'ciclos' => $ciclos, 'deportes' => $deportes, 'ramas' => $ramas);
+    $d = array('funciones' => $funciones, 'ciclos' => $ciclos, 'deportes' => $deportes, 'ramas' => $ramas, 'municipios' => $municipios);
     header("HTTP/1.1 200 OK");
     return print json_encode($d);
     $conexion = NULL;

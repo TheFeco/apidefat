@@ -14,7 +14,7 @@ $password = (isset($_POST['password'])) ? $_POST['password'] : '';
 
 $pass = md5($password); //encripto la clave enviada por el usuario para compararla con la clava encriptada y almacenada en la BD
 
-$consulta = "SELECT id, id_rol, usuario, sn_actualizar FROM usuarios WHERE usuario='$usuario' AND password='$pass' ";
+$consulta = "SELECT id, id_rol, id_nivel, usuario, sn_actualizar FROM usuarios WHERE usuario='$usuario' AND password='$pass' ";
 
 $resultado = $conexion->prepare($consulta);
 $resultado->execute();
