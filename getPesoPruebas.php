@@ -10,8 +10,8 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
     if(isset($_GET['id'])){
         $id=$_GET['id'];
         
-        //Traemos todas las ramas
-        $consulta = "SELECT id, nombre FROM peso WHERE id_deporte = $id ORDER BY id";
+        //Traemos todas las Pruebas que estan asignadas al peso
+        $consulta = "SELECT p.id, p.nombre FROM peso_pruebas AS pp INNER JOIN pruebas AS p ON (pp.id_prueba = p.id) WHERE pp.id_peso = $id ORDER BY id";
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
         if($resultado->rowCount() >= 1){
