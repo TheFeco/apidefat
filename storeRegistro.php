@@ -72,7 +72,11 @@ if($_POST['METHOD']=='POST'){
         $nombre_base=basename($_FILES["foto"]["name"]);
         $ext = substr($nombre_base, strrpos($nombre_base, '.')+1);
         $nombre_final = date("d-m-y")."-".$folio.'.'.$ext;
-        $ruta = "img/".$id_usuario."/". $nombre_final;
+        $path = "img/".$id_usuario."/";
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+        $ruta = $path. $nombre_final;
         $subirFoto = move_uploaded_file($_FILES["foto"]["tmp_name"], $ruta);
         if($subirFoto){
             $query2 = "UPDATE deportistas SET folio='$folio', foto='$ruta' WHERE id = $LAST_ID";
