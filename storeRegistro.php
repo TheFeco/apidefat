@@ -80,7 +80,7 @@ if($_POST['METHOD']==''){
         $subirFoto = move_uploaded_file($_FILES["foto"]["tmp_name"], $ruta);
         if($subirFoto){
             $query2 = "UPDATE deportistas SET folio='$folio', foto='$ruta' WHERE id = $LAST_ID";
-            // print_r($query2);
+            print_r($query2);
             $resultado = $conexion->prepare($query2);
             $resultado->execute();
             print_r($resultado->errorInfo());
