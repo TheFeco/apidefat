@@ -83,7 +83,7 @@ if($_POST['METHOD']==''){
             // print_r($query2);
             $resultado = $conexion->prepare($query2);
             $resultado->execute();
-            // print_r($resultado->errorInfo());
+            print_r($resultado->errorInfo());
             header("HTTP/1.1 200 Ok");
             $d = array('status' => "success", "message" => "¡Se guardo Exitosamente!");
             return print json_encode($d);
