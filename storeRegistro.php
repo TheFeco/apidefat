@@ -18,11 +18,11 @@ if($_POST['METHOD']=='POST'){
     $municipio     = $_POST["municipio"];
     $ciclo         = $_POST["ciclo"];
     $funcion       = $_POST["funcion"];
-    $deporte       = isset($_POST["deporte"]) ? $_POST["deporte"] : "";
-    $rama          = isset($_POST["rama"]) ? $_POST["rama"] : "";
-    $categoria     = isset($_POST["categoria"]) ? $_POST["categoria"] : "";
-    $peso          = isset($_POST["peso"]) ? $_POST["peso"] : "";
-    $prueba        = isset($_POST["prueba"]) ? $_POST["prueba"] : "";
+    $deporte       = isset($_POST["deporte"]) ? $_POST["deporte"] : 0;
+    $rama          = isset($_POST["rama"]) ? $_POST["rama"] : 0;
+    $categoria     = isset($_POST["categoria"]) ? $_POST["categoria"] : 0;
+    $peso          = isset($_POST["peso"]) ? $_POST["peso"] : 0;
+    $prueba        = isset($_POST["prueba"]) ? $_POST["prueba"] : 0;
 
     $id_usuario    = $_POST["usuario"];
 
@@ -57,7 +57,7 @@ if($_POST['METHOD']=='POST'){
                 $resultado = $conexion->prepare($query);
                 $resultado->execute();
                 $LAST_ID = $conexion->lastInsertId();
-                // print_r($resultado->errorInfo());
+                print_r($resultado->errorInfo());
                 
             $conexion->commit();
         } catch (\Throwable $th) {
@@ -79,10 +79,10 @@ if($_POST['METHOD']=='POST'){
         $subirFoto = move_uploaded_file($_FILES["foto"]["tmp_name"], $ruta);
         if($subirFoto){
             $query2 = "UPDATE deportistas SET folio='$folio', foto='$ruta' WHERE id = $LAST_ID";
-            // print_r($query2);
+            print_r($query2);
             $resultado = $conexion->prepare($query2);
             $resultado->execute();
-            // print_r($resultado->errorInfo());
+            print_r($resultado->errorInfo());
             header("HTTP/1.1 200 Ok");
             $d = array('status' => "success", "message" => "¡Se guardo Exitosamente!");
             return print json_encode($d);
