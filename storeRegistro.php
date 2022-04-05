@@ -3,7 +3,8 @@ include_once 'db/conexion.php';
 $objeto = new Conexion();
 $conexion = $objeto->Conectar();
 header('Access-Control-Allow-Origin: *');
-if($_POST['METHOD']==''){
+
+if($_POST['METHOD']=='POST'){
     unset($_POST['METHOD']);
     $curp          = $_POST["curp"];
     $nombre        = $_POST["nombre"];
@@ -22,7 +23,7 @@ if($_POST['METHOD']==''){
     $categoria     = isset($_POST["categoria"]) ? $_POST["categoria"] : "";
     $peso          = isset($_POST["peso"]) ? $_POST["peso"] : "";
     $prueba        = isset($_POST["prueba"]) ? $_POST["prueba"] : "";
-   
+
     $id_usuario    = $_POST["usuario"];
 
     switch ($funcion) {
@@ -57,11 +58,12 @@ if($_POST['METHOD']==''){
                 $resultado->execute();
                 $LAST_ID = $conexion->lastInsertId();
                 // print_r($resultado->errorInfo());
+                
             $conexion->commit();
         } catch (\Throwable $th) {
             echo "Mensaje de Error: " . $th->getMessage();
         }
-        
+       
         $query = ("SELECT nombre FROM `ciclos` WHERE id='$ciclo'");
         $resultado = $conexion->prepare($query);
         $resultado->execute();
@@ -73,17 +75,14 @@ if($_POST['METHOD']==''){
         $ext = substr($nombre_base, strrpos($nombre_base, '.')+1);
         $nombre_final = date("d-m-y")."-".$folio.'.'.$ext;
         $path = "img/".$id_usuario."/";
-        // if (!file_exists($path)) {
-        //     mkdir($path, 0777, true);
-        // }
         $ruta = $path. $nombre_final;
         $subirFoto = move_uploaded_file($_FILES["foto"]["tmp_name"], $ruta);
         if($subirFoto){
             $query2 = "UPDATE deportistas SET folio='$folio', foto='$ruta' WHERE id = $LAST_ID";
-            print_r($query2);
+            // print_r($query2);
             $resultado = $conexion->prepare($query2);
             $resultado->execute();
-            print_r($resultado->errorInfo());
+            // print_r($resultado->errorInfo());
             header("HTTP/1.1 200 Ok");
             $d = array('status' => "success", "message" => "¡Se guardo Exitosamente!");
             return print json_encode($d);
