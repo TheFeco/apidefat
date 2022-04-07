@@ -57,7 +57,7 @@ if($_POST['METHOD']=='POST'){
                 $resultado = $conexion->prepare($query);
                 $resultado->execute();
                 $LAST_ID = $conexion->lastInsertId();
-                print_r($resultado->errorInfo());
+                // print_r($resultado->errorInfo());
                 
             $conexion->commit();
         } catch (\Throwable $th) {
@@ -79,10 +79,10 @@ if($_POST['METHOD']=='POST'){
         $subirFoto = move_uploaded_file($_FILES["foto"]["tmp_name"], $ruta);
         if($subirFoto){
             $query2 = "UPDATE deportistas SET folio='$folio', foto='$ruta' WHERE id = $LAST_ID";
-            print_r($query2);
+            // print_r($query2);
             $resultado = $conexion->prepare($query2);
             $resultado->execute();
-            print_r($resultado->errorInfo());
+            // print_r($resultado->errorInfo());
             header("HTTP/1.1 200 Ok");
             $d = array('status' => "success", "message" => "¡Se guardo Exitosamente!");
             return print json_encode($d);

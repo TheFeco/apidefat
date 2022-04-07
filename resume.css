@@ -19,12 +19,18 @@ h2 { font-size: 152%; text-align: center; color: #651D32; }
 h3, h4 { font-size: 80%; }
 h1, h3, h4 { color: #333; }
 p { font-size: 80%; line-height: 18px; padding-right: 3em; }
-li { line-height: 5px; border-bottom: 1px solid #ccc; }
+/* li { line-height: 5px; border-bottom: 1px solid #ccc; } */
+li {list-style:none;}
 
 /* //-- section styles -- */
 .job { position: relative; }
 .job h4 { position: absolute; top: 0.35em; right: 0 }
 .job p { margin: 15px 0 15px 0; }
+
+div.weekday_time {
+    display:block;
+}
+
 
 
 

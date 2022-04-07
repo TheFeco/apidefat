@@ -7,9 +7,10 @@ include_once 'db/conexion.php';
 $objeto = new Conexion();
 $conexion = $objeto->Conectar();
 header('Access-Control-Allow-Origin: *');
+$_POST['METHOD']='POST';
 if($_POST['METHOD']=='POST'){
 $id_usuario = isset($_GET['usuarios']) ? $_GET['usuarios'] : 0;
-$id_ciclo = isset($_GET['ciclo']) ? $_GET['ciclo'] : 0;
+$id_ciclo = isset($_GET['ciclo']) ? $_GET['ciclo'] : 1;
 $id_funcion = isset($_GET['funcion']) ? $_GET['funcion'] : 0;
 $id_deporte = isset($_GET['deporte']) ? $_GET['deporte'] : 0;
 $id_rama = isset($_GET['rama']) ? $_GET['rama'] : 0;
@@ -48,107 +49,77 @@ if($resultado->rowCount() >= 1){
     return print json_encode($d);
     $conexion = NULL;
 }
+$html = '';
+$html .= '<table>';
 
-$html = '<table>';
-// foreach ($variable as $key => $value) {
-//     # code...
-// }
 foreach ($data as $row) { 
 $html .= '
-    <tr>
+        <tr>
 
-        <td> 
-            <img src="'.$row["foto"].'" class="imagen" height="100" width="100">  
+            <td> 
+                <img src="'.$row["foto"].'" class="imagen" height="100" width="100">  
 
-            <h3>'.$row["funcion"].'</h3>
+                <h3>'.$row["funcion"].'</h3>
 
-            <h3>'.$row["rama"].'</h3>
-            
-        </td>
+                <h3>'.$row["rama"].'</h3>
+                
+            </td>
 
-        <td>
-            <div class="job">
+            <td>
+                <div class="job">
+                    <span style="display: inline-flex"><span><h3>Apellido(s): </h3></span><span><p>'.$row["apellidos"].'</p></span> </span>
+                    <span style="display: inline-flex"><span><h3>Nombre(s): </h3></span><span><p>'.$row["nombre"].'</p></span> </span>
+                    <span style="display: inline-flex"><span><h3>Fecha de nacimiento: </h3></span><span><p>'.$row["fh_nacimeinto"].'</p></span> </span>
+                    <span style="display: inline-flex"><span><h3>CURP: </h3></span><span><p>'.$row["curp"].'</p></span> </span>
+                    <span style="display: inline-flex"><span><h3>Escuela: </h3></span><span><p>'.$row["escuela"].'</p></span> </span>
+                    <span style="display: inline-flex"><span><h3>Turno: </h3></span><span><p>'.$row["turno"].'</p></span> </span>
+                    <span style="display: inline-flex"><span><h3>Entidad: </h3></span><span><p>Sinaloa</p></span> </span>
+                    <span style="display: inline-flex"><span><h3>Municipio: </h3></span><span><p>'.$row["municipio"].'</p></span> </span>
+                    <span style="display: inline-flex"><span><h3>Zona Escolar: </h3></span><span><p>'.str_pad($row["zona"],2,"0", STR_PAD_LEFT).'</p></span> </span>
+                </div>	
 
-                <h3>Apellido(s):</h3>
-                                                        
-                <h3>Nombre(s):</h3>
+            </td>
+        </tr>
 
-                <h3>Fecha de nacimiento:</h3>                 
+        <tr class="espacio" style="">
+            <td>
+                <h3>PRUEBA(S):</h3>
+            </td>
 
-                <h3>CURP:</h3>
-
-                <h3>Escuela:</h3>
-
-                <h3>Turno:</h3>
-
-                <h3>Entidad:</h3>
-
-                <h3>Municipio:</h3>
-
-                <h3>Zona Escolar:</h3>
-
-            </div>	
-
-        </td>
-
-        <td>
-
-            <div class="job">
-                <p>'.$row["apellidos"].'</p>
-                                
-                <p>'.$row["nombre"].'</p>
-
-                <p>'.$row["fh_nacimeinto"].'</p>                            
-
-                <p>'.$row["curp"].'</p>    
-
-                <p>'.$row["escuela"].'</p>
-
-                <p>'.$row["turno"].'</p>
-
-                <p>Sinaloa</p>
-
-                <p>'.$row["municipio"].'</p>
-
-                <p>'.str_pad($row["zona"],2,"0", STR_PAD_LEFT).'</p>
-
-            </div>	
-
-        </td>
-    </tr>
-
-    <tr class="espacio" style="">
-        <td>
-            <h3>PRUEBA(S):</h3>
-        </td>
-
-        <td class="tdptruebas" colspan="2">
-            <p>'.$row["array_pruebas"].'</p>
-        </td>
-    </tr>
-';
+            <td class="tdptruebas" colspan="2">
+                <p>'.$row["array_pruebas"].'</p>
+            </td>
+        </tr>
+    ';
 }
 $html .= '</table>';
-$mpdf = new \Mpdf\Mpdf();
+$mpdf = new \Mpdf\Mpdf([
+    'mode' => 'utf-8',
+    'marginLeft' => 0,
+    'format' => 'LEGAL',
+    'orientation' => 'P'
+]);
+$stylesheet = file_get_contents('bootstrap.min.css');
 $stylesheet = file_get_contents('resume.css');
-$mpdf->WriteHTML($stylesheet,\Mpdf\HTMLParserMode::HEADER_CSS);
+$mpdf->WriteHTML($stylesheet,1);
 $mpdf->setAutoTopMargin="stretch";
 $mpdf->setAutoBottomMargin="stretch";
 $mpdf->defaultheaderline = 0;
 $mpdf->defaultfooterline = 0;
+$mpdf->SetDisplayMode('fullpage');
 $mpdf->SetHeader('
 <div id="inner">
     <img src="img/banner.png" width="100%">
-    <h2>Juegos Deportivos Nacionales Escolares de la Educación Básica '.$ciclo.'</h2>					
+    <h2>Juegos Deportivos Escolares de la Educación Básica '.$ciclo.'</h2>					
 </div>');
 
 $mpdf->SetFooter('
-<div id="inner">
+<div id="inner2">
     <h3 class="centerText">______________________________________________</h3>		
     <h3 class="centerText">Titular de Educación Física en el Estado</h3>	
     <h3 class="centerText">Nombre, Firma y Sello</h3>
 </div>');
-
+$mpdf->SetColumns(2);
 $mpdf->WriteHTML($html);
 
 $mpdf->Output();
