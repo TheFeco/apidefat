@@ -12,9 +12,6 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
         $id=$_GET['id'];
         //$consulta = "SELECT informes.*, ciclos.nombre AS ciclo , periodos.nombre AS periodo FROM informes JOIN ciclos ON( informes.id_ciclo = ciclos.id ) JOIN periodos ON( informes.id_periodo = periodos.id ) WHERE id_usuario='$id' ";
        
-    }else{
-       // $consulta = "SELECT informes.*, e.cct , ciclos.nombre AS ciclo , periodos.nombre AS periodo FROM informes JOIN ciclos ON( informes.id_ciclo = ciclos.id ) JOIN periodos ON( informes.id_periodo = periodos.id ) JOIN escuelas AS e ON( informes.id_escuela = e.id ) ORDER BY e.Nombre,informes.id_ciclo,informes.id_periodo DESC";
-        
     }
     //Traemos todas las funciones
     $consultaFunciones = "SELECT id, nombre FROM funciones ORDER BY id";

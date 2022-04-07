@@ -83,4 +83,46 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
         
     }
 }
+if($_POST['METHOD']=='POST'){
+    unset($_POST['METHOD']);
+    $id_usuario    = $_POST["usuario"];
+    $ciclo         = $_POST["ciclo"];
+    $funcion       = $_POST["funcion"];
+    $deporte       = isset($_POST["deporte"]) ? $_POST["deporte"] : 0;
+    $rama          = isset($_POST["rama"]) ? $_POST["rama"] : 0;
+    $categoria     = isset($_POST["categoria"]) ? $_POST["categoria"] : 0;
+    $peso          = isset($_POST["peso"]) ? $_POST["peso"] : 0;
+    $prueba        = isset($_POST["prueba"]) ? $_POST["prueba"] : 0;
+
+    $query = "SELECT d.id, d.escuela, c.nombre AS ciclo, f.nombre AS funcion, dp.nombre AS deporte  FROM deportistas AS d INNER JOIN ciclos AS c ON (d.id_ciclo = c.id) INNER JOIN funciones AS f  ON (d.id_funcion = f.id) LEFT JOIN deportes AS dp ON (d.id_deporte = dp.id) WHERE d.id_usuairo = $id_usuario AND c.id = $ciclo AND id_funcion = $funcion ";
+    if(isset($_POST["deporte"])){
+        $deporte       = $_POST["deporte"];
+        $query.= "AND id_deporte = $deporte";
+    }
+    if(isset($_POST["rama"])){
+        $rama       = $_POST["rama"];
+        $query.= "AND id_rama = $rama";
+    }
+    if(isset($_POST["categoria"])){
+        $categoria       = $_POST["categoria"];
+        $query.= "AND id_categoria = $categoria";
+    }
+    if(isset($_POST["peso"])){
+        $peso       = $_POST["peso"];
+        $query.= "AND id_peso = $peso";
+    }
+    if(isset($_POST["prueba"])){
+        $prueba       = $_POST["prueba"];
+        $query.= "AND id_prueba = $prueba";
+    }
+    $query.= "GROUP BY d.id, d.escuela, ciclo, funcion, deporte ";
+    $resultado = $conexion->prepare($query);
+    $resultado->execute();
+    $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
+
+    $d = array('datas' => $data);
+    header("HTTP/1.1 200 OK");
+    return print json_encode($d);
+    $conexion = NULL;
+}
 ?>
