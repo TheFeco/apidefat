@@ -7,11 +7,24 @@ $conexion = $objeto->Conectar();
 
 header('Access-Control-Allow-Origin: *');
 if($_SERVER['REQUEST_METHOD']=='GET'){
-    if(isset($_GET['id'])){
-        $id=$_GET['id'];
+
+    if(isset($_GET['id_deporte'])){
+        $id_deporte = $_GET['id_deporte'];
+        $id_usuario = $_GET['id_usuario'];
+        $id_rama = $_GET['id_rama'];
+        $id_nivel;
+
+        $consultaCiclo = "SELECT id_nivel FROM usuarios WHERE id =".$id_usuario;
+        $resultado = $conexion->prepare($consultaCiclo);
+        $resultado->execute();
+        $rows=$resultado->fetchAll(PDO::FETCH_ASSOC);
+        foreach( $rows as $row ) {
+                $id_nivel = $row["id_nivel"];
+        }
         
         //Traemos todas las ramas
-        $consulta = "SELECT id, nombre FROM peso WHERE id_deporte = $id ORDER BY id";
+        $consulta = "SELECT p.id, p.nombre FROM deportes_peso AS pp INNER JOIN peso AS p ON (pp.id_peso = p.id) WHERE pp.id_deporte = $id_deporte AND pp.id_nivel = $id_nivel AND pp.id_rama = $id_rama ORDER BY id";
+        // die($consulta);
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
         if($resultado->rowCount() >= 1){

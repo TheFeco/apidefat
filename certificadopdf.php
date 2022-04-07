@@ -1,11 +1,23 @@
 <?php
 
+use Mpdf\Tag\Legend;
+
 require_once __DIR__ . '/vendor/autoload.php';
 include_once 'db/conexion.php';
 $objeto = new Conexion();
 $conexion = $objeto->Conectar();
 header('Access-Control-Allow-Origin: *');
-$id_ciclo = isset($_GET['id_ciclo']) ? $_GET['id_ciclo'] : 1;
+if($_POST['METHOD']=='POST'){
+$id_usuario = isset($_GET['usuarios']) ? $_GET['usuarios'] : 0;
+$id_ciclo = isset($_GET['ciclo']) ? $_GET['ciclo'] : 0;
+$id_funcion = isset($_GET['funcion']) ? $_GET['funcion'] : 0;
+$id_deporte = isset($_GET['deporte']) ? $_GET['deporte'] : 0;
+$id_rama = isset($_GET['rama']) ? $_GET['rama'] : 0;
+$id_categoria = isset($_GET['categoria']) ? $_GET['categoria'] : 0;
+$id_peso = isset($_GET['peso']) ? $_GET['peso'] : 0;
+$id_prueba = isset($_GET['peso']) ? $_GET['peso'] : 0;
+
+//obtenemos el nombre del ciclo
 $consultaCiclo = "SELECT id, nombre FROM ciclos WHERE id =".$id_ciclo;
 $resultado = $conexion->prepare($consultaCiclo);
 $resultado->execute();
@@ -14,25 +26,43 @@ foreach( $rows as $row ) {
         $ciclo = $row["nombre"];
 }
 
-$consulta = "SELECT d.folio, d.curp,d.nombre, d.apellidos, d.fh_nacimiento, d.cct, d.escuela, CASE WHEN turno = 1 THEN 'Matutino' WHEN turno = 2 THEN 'vespertino' END AS turno, f.nombre AS funcion, d.foto  FROM deportistas AS d INNER JOIN funciones AS f ON (d.id_funcion = f.id)  WHERE d.id_funcion = 3 AND d.id_ciclo = 1 AND d.id_usuairo = 1";
+$consulta = "SELECT d.folio, d.nombre, d.apellidos, d.curp, d.foto,DATE_FORMAT(d.fh_nacimiento,'%d/%m/%Y') AS fh_nacimeinto, d.cct, d.escuela, d.zona, CASE WHEN turno = 1 THEN 'Matutino' WHEN turno = 2 THEN 'vespertino' END AS turno,c.nombre AS ciclo, m.nombre AS municipio, f.nombre AS funcion, dp.nombre AS deporte, r.nombre AS rama, cat.nombre AS categoria, peso.nombre AS peso, pruebas.nombre AS prueba, CONCAT_WS(':, ', cat.nombre,peso.nombre,pruebas.nombre) AS array_pruebas
+FROM deportistas AS d 
+INNER JOIN ciclos AS c ON (d.id_ciclo = c.id) 
+INNER JOIN funciones AS f  ON (d.id_funcion = f.id) 
+INNER JOIN municipios AS m ON( d.id_municipio = m.id) 
+LEFT JOIN deportes AS dp ON (d.id_deporte = dp.id) 
+LEFT JOIN ramas AS r ON( d.id_rama = r.id )
+LEFT JOIN  categorias AS cat ON ( d.id_categoria = cat.id)
+LEFT JOIN peso ON (d.id_peso = peso.id)
+LEFT JOIN pruebas ON (d.id_prueba = pruebas.id)
+";
+
 $resultado = $conexion->prepare($consulta);
 $resultado->execute();
-$data=$resultado->fetchAll(PDO::FETCH_ASSOC);
+if($resultado->rowCount() >= 1){
+    $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+}else{
+    $d = array('menssage' => 'No se encontro ningun dato.');
+    header("HTTP/1.1 500 OK");
+    return print json_encode($d);
+    $conexion = NULL;
+}
 
 $html = '<table>';
 // foreach ($variable as $key => $value) {
 //     # code...
 // }
-for ($i=0; $i < 50; $i++) { 
+foreach ($data as $row) { 
 $html .= '
     <tr>
 
         <td> 
-            <img src="img/foto.jpg" class="imagen" height="100" width="100">  
+            <img src="'.$row["foto"].'" class="imagen" height="100" width="100">  
 
-            <h3>Deportista</h3>
+            <h3>'.$row["funcion"].'</h3>
 
-            <h3>Mixto</h3>
+            <h3>'.$row["rama"].'</h3>
             
         </td>
 
@@ -64,23 +94,23 @@ $html .= '
         <td>
 
             <div class="job">
-                <p>Rodríguez Betrán </p>
+                <p>'.$row["apellidos"].'</p>
                                 
-                <p>Carlos Francisco </p>
+                <p>'.$row["nombre"].'</p>
 
-                <p>25/12/1993</p>                            
+                <p>'.$row["fh_nacimeinto"].'</p>                            
 
-                <p>ROBC961104HSLDLR04</p>    
+                <p>'.$row["curp"].'</p>    
 
-                <p>General Alvaro Obregón</p>
+                <p>'.$row["escuela"].'</p>
 
-                <p>Matutino</p>
+                <p>'.$row["turno"].'</p>
 
                 <p>Sinaloa</p>
 
-                <p>Culiacán</p>
+                <p>'.$row["municipio"].'</p>
 
-                <p>025</p>
+                <p>'.str_pad($row["zona"],2,"0", STR_PAD_LEFT).'</p>
 
             </div>	
 
@@ -93,7 +123,7 @@ $html .= '
         </td>
 
         <td class="tdptruebas" colspan="2">
-            <p>Clásico (60 min):, Rápido (30 min.):</p>
+            <p>'.$row["array_pruebas"].'</p>
         </td>
     </tr>
 ';
@@ -122,3 +152,9 @@ $mpdf->SetFooter('
 $mpdf->WriteHTML($html);
 
 $mpdf->Output();
+}else{
+    header("HTTP/1.1 500 Ok");
+    $d = array('menssage' => "Error no es usuario administrador");
+    return print json_encode($d);
+    $conexion = NULL;
+}
