@@ -9,8 +9,27 @@ $conexion = $objeto->Conectar();
 header('Access-Control-Allow-Origin: *');
 if($_SERVER['REQUEST_METHOD']=='GET'){
     if(isset($_GET['id'])){
-        $id=$_GET['id'];
-        //$consulta = "SELECT informes.*, ciclos.nombre AS ciclo , periodos.nombre AS periodo FROM informes JOIN ciclos ON( informes.id_ciclo = ciclos.id ) JOIN periodos ON( informes.id_periodo = periodos.id ) WHERE id_usuario='$id' ";
+        $id = $_GET['id'];
+        $consulta = "
+            SELECT dp.escuela, c.nombre AS ciclo, f.nombre AS funcion, d.nombre AS deporte, r.nombre AS rama
+            FROM deportistas AS dp 
+            INNER JOIN ciclos AS c ON (dp.id_ciclo = c.id) 
+            INNER JOIN funciones AS f ON ( dp.id_funcion = f.id)
+            LEFT JOIN deportes AS d ON (dp.id_deporte = d.id)
+            LEFT JOIN ramas  AS r ON (dp.id_rama = r.id)
+            WHERE dp.id_usuairo = '$id' 
+            GROUP BY dp.escuela, c.nombre, f.nombre, d.nombre, r.nombre
+            ORDER BY c.nombre DESC 
+        ";
+        $resultado = $conexion->prepare($consulta);
+        $resultado->execute();
+        if($resultado->rowCount() >= 1){
+            $registros = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        }else{
+            $errors = $resultado->errorInfo();
+            echo $errors[2] . ", " . $errors[1] . " ," . $errors[0];
+            $registros=null;
+        }
        
     }
     //Traemos todas las funciones
@@ -64,7 +83,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
         $municipios=null;
     }
     // 
-    $d = array('funciones' => $funciones, 'ciclos' => $ciclos, 'deportes' => $deportes, 'ramas' => $ramas, 'municipios' => $municipios);
+    $d = array('registros' => $registros,'funciones' => $funciones, 'ciclos' => $ciclos, 'deportes' => $deportes, 'ramas' => $ramas, 'municipios' => $municipios);
     header("HTTP/1.1 200 OK");
     return print json_encode($d);
     $conexion = NULL;
