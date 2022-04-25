@@ -9,14 +9,14 @@ if($_POST['METHOD']=='POST'){
     $id_usuario = isset($_POST['usuario']) ? $_POST['usuario'] : 2;
     $id_ciclo = isset($_POST['ciclo']) ? $_POST['ciclo'] : 1;
     $id_funcion = isset($_POST['funcion']) ? $_POST['funcion'] : 1;
-    $id_deporte = isset($_POST['deporte']) ? $_POST['deporte'] : 3;
+    $id_deporte = isset($_POST['deporte']) ? $_POST['deporte'] : 2;
     $id_rama = isset($_POST['rama']) ? $_POST['rama'] : 0;
     $id_categoria = isset($_POST['categoria']) ? $_POST['categoria'] : 0;
     $id_peso = isset($_POST['peso']) ? $_POST['peso'] : 0;
     $id_prueba = isset($_POST['prueba']) ? $_POST['prueba'] : 0;
 
     //Consultas de Mysql que trae
-    $consulta = "SELECT d.folio, d.nombre, d.apellidos, d.curp, d.foto,DATE_FORMAT(d.fh_nacimiento,'%d/%m/%Y') AS fh_nacimeinto, d.cct, d.escuela, d.zona, CASE WHEN turno = 1 THEN 'Matutino' WHEN turno = 2 THEN 'vespertino' END AS turno,c.nombre AS ciclo, m.nombre AS municipio, f.nombre AS funcion, dp.nombre AS deporte, r.nombre AS rama, cat.nombre AS categoria, peso.nombre AS peso, pruebas.nombre AS prueba, CONCAT_WS(':, ', cat.nombre,peso.nombre,pruebas.nombre) AS array_pruebas
+    $consulta = "SELECT d.folio, UPPER(d.nombre) AS nombre, UPPER(d.apellidos) AS apellidos , d.curp, DATE_FORMAT(d.fh_nacimiento,'%d/%m/%Y') AS fh_nacimeinto, d.cct, d.escuela, d.zona, CASE WHEN turno = 1 THEN 'Matutino' WHEN turno = 2 THEN 'vespertino' END AS turno,c.nombre AS ciclo, m.nombre AS municipio, f.nombre AS funcion, dp.nombre AS deporte, r.nombre AS rama, cat.nombre AS categoria, peso.nombre AS peso, pruebas.nombre AS prueba
     FROM deportistas AS d 
     INNER JOIN ciclos AS c ON (d.id_ciclo = c.id) 
     INNER JOIN funciones AS f  ON (d.id_funcion = f.id) 
@@ -58,23 +58,34 @@ if($_POST['METHOD']=='POST'){
         return print json_encode($d);
         $conexion = NULL;
     }
-    // Obtenemos las columnas
-    $columns = [];
-    for ($i = 0; $i < $resultado->columnCount(); $i++) {
-        $columns[] = $resultado->getColumnMeta($i)['name'];
-    }
-    header("Content-Type:$contentType"); 
-    header("Content-Disposition:attachment;filename=output.$outputFileExtension");
-    require 'vendor/autoload.php';
-    $spreadsheet = new Spreadsheet();
-    $sheet = $spreadsheet->getActiveSheet();
-    $sheet->setCellValue('A1', 'Hello World !');
+        $temp_file = 'files/tmp/ExportExcel.csv';
+        
+        outputCsv($data, $temp_file);
+        
+        exit;
+        
+        
 
-    $writer = new Xlsx($spreadsheet);
-    $writer->save('hello world.xlsx');
 }else{
     header("HTTP/1.1 500 Ok");
     $d = array('menssage' => "Error no es usuario administrador");
     return print json_encode($d);
     $conexion = NULL;
+}
+function outputCsv( $assocDataArray, $temp_file ) {
+    if ( !empty( $assocDataArray ) ):
+        $fp = fopen( $temp_file, 'w' );
+        fputs( $fp, $bom = chr(0xEF) . chr(0xBB) . chr(0xBF) );
+        fputcsv( $fp, array_keys( reset($assocDataArray) ) );
+
+        foreach ( $assocDataArray AS $values ):
+            fputcsv( $fp, $values );
+        endforeach;
+
+        fclose( $fp );
+    endif;
+    $d = array("file" => $temp_file, "name" => 'ExportExcel.csv' );
+    header("HTTP/1.1 200 OK");
+    return print json_encode($d);
+    exit();
 }

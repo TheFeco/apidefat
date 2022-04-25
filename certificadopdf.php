@@ -117,8 +117,7 @@ $html .= '
 
             </td>
         </tr>
-
-        <tr class="espacio" style="">
+        <tr class="espacio">
             <td>
                 <h3>PRUEBA(S):</h3>
             </td>
@@ -160,7 +159,8 @@ $mpdf->SetFooter('
 </div>');
 $mpdf->SetColumns($colums);
 $mpdf->WriteHTML($html);
-$name = 'draft-' . md5(uniqid(mt_rand(), true)) . '.pdf';
+$mpdf->AddColumn();
+$name = 'cedulas-' . md5(uniqid(mt_rand(), true)) . '.pdf';
 $filename = "files/tmp/";
 if (!file_exists($filename)) {
     mkdir($filename, 0777, true);
