@@ -10,7 +10,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
     if(isset($_GET['id'])){
         $id = $_GET['id'];
         $consulta = "
-            SELECT dp.escuela, dp.id_ciclo, c.nombre AS ciclo, dp.id_funcion, f.nombre AS funcion, dp.id_deporte, d.nombre AS deporte, dp.id_rama, r.nombre AS rama
+            SELECT dp.escuela, dp.cct, dp.id_ciclo, c.nombre AS ciclo, dp.id_funcion, f.nombre AS funcion, dp.id_deporte, d.nombre AS deporte, dp.id_rama, r.nombre AS rama
             FROM deportistas AS dp 
             INNER JOIN ciclos AS c ON (dp.id_ciclo = c.id) 
             INNER JOIN funciones AS f ON ( dp.id_funcion = f.id)
