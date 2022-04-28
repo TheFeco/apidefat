@@ -26,7 +26,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
             $registros = $resultado->fetchAll(PDO::FETCH_ASSOC);
         }else{
             $errors = $resultado->errorInfo();
-            echo $errors[2] . ", " . $errors[1] . " ," . $errors[0];
+            // echo $errors[2] . ", " . $errors[1] . " ," . $errors[0];
             $registros=null;
         }
        
