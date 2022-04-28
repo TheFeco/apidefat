@@ -27,7 +27,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
         }else{
             $errors = $resultado->errorInfo();
             // echo $errors[2] . ", " . $errors[1] . " ," . $errors[0];
-            $registros=null;
+            $registros=[];
         }
        
     }
