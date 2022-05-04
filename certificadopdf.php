@@ -18,6 +18,7 @@ $id_rama = isset($_POST['rama']) ? $_POST['rama'] : 0;
 $id_categoria = isset($_POST['categoria']) ? $_POST['categoria'] : 0;
 $id_peso = isset($_POST['peso']) ? $_POST['peso'] : 0;
 $id_prueba = isset($_POST['prueba']) ? $_POST['prueba'] : 0;
+$cct = isset($_POST['cct']) ? $_POST['cct'] : 0;
 
 // Variables para el pdf
 $colums = 2;
@@ -71,6 +72,9 @@ if($id_peso != 0){
 }
 if($id_prueba != 0){
     $consulta .= "AND d.id_prueba = '$id_prueba' "; 
+}
+if($cct != 0){
+    $consulta .= "AND d.cct = '$cct' "; 
 }
 
 $resultado = $conexion->prepare($consulta);
