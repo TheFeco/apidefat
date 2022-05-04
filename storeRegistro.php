@@ -53,7 +53,7 @@ if($_POST['METHOD']=='POST'){
 
             mkdir('./img/'.$id_usuario, 0777, true);
         }
-        die('nel perro');
+        
         try {
             $conexion->beginTransaction();
                 $resultado = $conexion->prepare($query);
