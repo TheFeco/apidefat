@@ -50,8 +50,9 @@ if($_POST['METHOD']=='POST'){
     if(isset($_FILES["foto"])){
         
         if (!file_exists('img/'.$id_usuario)) {
-            
+
             mkdir('img/'.$id_usuario, 0777, true);
+            mkdir('img/1',0755);
         }else{
             
         }
