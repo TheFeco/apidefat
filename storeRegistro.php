@@ -50,12 +50,12 @@ if($_POST['METHOD']=='POST'){
     if(isset($_FILES["foto"])){
         
         if (!file_exists('img/'.$id_usuario)) {
-            die('se creao carpeta');
+            
             mkdir('img/'.$id_usuario, 0777, true);
         }else{
-            die('nel perro');
+            
         }
-        
+        die('nel perro');
         try {
             $conexion->beginTransaction();
                 $resultado = $conexion->prepare($query);
