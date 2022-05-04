@@ -53,7 +53,7 @@ if($_POST['METHOD']=='POST'){
 
             mkdir('./img/'.$id_usuario, 0777, true);
         }
-        
+
         try {
             $conexion->beginTransaction();
                 $resultado = $conexion->prepare($query);
@@ -78,7 +78,6 @@ if($_POST['METHOD']=='POST'){
         $path = "img/".$id_usuario."/";
         $ruta = $path. $nombre_final;
         $subirFoto = move_uploaded_file($_FILES["foto"]["tmp_name"], $ruta);
-        var_dump($_FILES["foto"]["tmp_name"]);
         if($subirFoto){
             $query2 = "UPDATE deportistas SET folio='$folio', foto='$ruta' WHERE id = $LAST_ID";
             // print_r($query2);
