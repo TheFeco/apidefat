@@ -48,9 +48,12 @@ if($_POST['METHOD']=='POST'){
     }
 
     if(isset($_FILES["foto"])){
-        die('hotla mundo');
+        
         if (!file_exists('img/'.$id_usuario)) {
+            die('se creao carpeta');
             mkdir('img/'.$id_usuario, 0777, true);
+        }else{
+            die('nel perro');
         }
         
         try {
