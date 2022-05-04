@@ -51,8 +51,7 @@ if($_POST['METHOD']=='POST'){
         
         if (!file_exists('img/'.$id_usuario)) {
 
-            mkdir('img/'.$id_usuario, 0777, true);
-            mkdir('img/1',0755);
+            mkdir('img/'.$id_usuario, 0777, true) or die("No se puede crear el directorio de extracci&oacute;n");
         }else{
             
         }
