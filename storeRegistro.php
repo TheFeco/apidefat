@@ -51,7 +51,7 @@ if($_POST['METHOD']=='POST'){
         
         if (!file_exists('img/'.$id_usuario)) {
 
-            mkdir('img/'.$id_usuario, 0777, true)
+            mkdir('img/'.$id_usuario, 0777, true);
         }
         die('nel perro');
         try {
