@@ -43,7 +43,7 @@ if($_POST['METHOD']=='POST'){
             $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_usuairo) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$id_usuario')";
             break;
         case '6':
-            $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_deporte, id_rama, id_usuairo) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$deporte', '$id_usuario')";
+            $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_deporte, id_usuairo) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$deporte', '$id_usuario')";
             break;
     }
 
