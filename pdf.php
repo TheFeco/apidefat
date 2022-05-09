@@ -14,6 +14,7 @@ if($_POST['METHOD']=='POST'){
     $id_categoria = isset($_POST['categoria']) ? $_POST['categoria'] : 0;
     $id_peso = isset($_POST['peso']) ? $_POST['peso'] : 0;
     $id_prueba = isset($_POST['prueba']) ? $_POST['prueba'] : 0;
+    $cct = isset($_POST['cct']) ? $_POST['cct'] : 0;
 
     //Consultas de Mysql que trae
     $consulta = "SELECT d.folio, d.nombre, d.apellidos, d.curp, d.foto,DATE_FORMAT(d.fh_nacimiento,'%d/%m/%Y') AS fh_nacimeinto, d.cct, d.escuela, d.zona, CASE WHEN turno = 1 THEN 'Matutino' WHEN turno = 2 THEN 'vespertino' END AS turno,c.nombre AS ciclo, m.nombre AS municipio, f.nombre AS funcion, dp.nombre AS deporte, r.nombre AS rama, cat.nombre AS categoria, peso.nombre AS peso, pruebas.nombre AS prueba, CONCAT_WS(':, ', cat.nombre,peso.nombre,pruebas.nombre) AS array_pruebas
@@ -44,6 +45,9 @@ if($_POST['METHOD']=='POST'){
     }
     if($id_prueba != 0){
         $consulta .= "AND d.id_prueba = '$id_prueba' "; 
+    }
+    if($cct != 0){
+        $consulta .= "AND d.cct = '$cct' "; 
     }
 
     $resultado = $conexion->prepare($consulta);
