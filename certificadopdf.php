@@ -11,7 +11,7 @@ header('Access-Control-Allow-Origin: *');
 if($_POST['METHOD']=='POST'){
 
 $id_usuario = isset($_POST['usuario']) ? $_POST['usuario'] : 0;
-$id_ciclo = isset($_POST['ciclo']) ? $_POST['ciclo'] : 1;
+$id_ciclo = isset($_POST['usuario']) ? $_POST['ciclo'] : 1;
 $id_funcion = isset($_POST['funcion']) ? $_POST['funcion'] : 0;
 $id_deporte = isset($_POST['deporte']) ? $_POST['deporte'] : 0;
 $id_rama = isset($_POST['rama']) ? $_POST['rama'] : 0;
@@ -76,7 +76,7 @@ if($id_prueba != 0){
 if($cct != 0){
     $consulta .= "AND d.cct = '$cct' "; 
 }
-die($consulta);
+
 $resultado = $conexion->prepare($consulta);
 $resultado->execute();
 if($resultado->rowCount() >= 1){
