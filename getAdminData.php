@@ -94,7 +94,7 @@ if($_POST['METHOD']=='POST'){
     $peso          = isset($_POST["peso"]) ? $_POST["peso"] : 0;
     $prueba        = isset($_POST["prueba"]) ? $_POST["prueba"] : 0;
 
-    $query = "SELECT d.id_usuairo AS id_zona, d.escuela, d.cct, CASE WHEN turno = 1 THEN 'Matutino' WHEN turno = 2 THEN 'vespertino' END AS turno, d.id_ciclo, c.nombre AS ciclo, d.id_funcion, f.nombre AS funcion, dp.nombre AS deporte, d.id_deporte, d.id_rama, ramas.nombre AS rama  FROM deportistas AS d INNER JOIN ciclos AS c ON (d.id_ciclo = c.id) INNER JOIN funciones AS f  ON (d.id_funcion = f.id) LEFT JOIN deportes AS dp ON (d.id_deporte = dp.id) LEFT JOIN ramas ON (d.id_rama = ramas.id) WHERE d.id_usuairo = $id_usuario AND c.id = $ciclo AND id_funcion = $funcion ";
+    $query = "SELECT d.id_usuairo AS id_zona, d.escuela, d.cct, CASE WHEN turno = 1 THEN 'Matutino' WHEN turno = 2 THEN 'vespertino' END AS turno, d.id_ciclo, c.nombre AS ciclo, d.id_funcion, f.nombre AS funcion, dp.nombre AS deporte, d.id_deporte, d.id_rama, ramas.nombre AS rama, d.id_categoria, d.id_peso, d.id_prueba,  FROM deportistas AS d INNER JOIN ciclos AS c ON (d.id_ciclo = c.id) INNER JOIN funciones AS f  ON (d.id_funcion = f.id) LEFT JOIN deportes AS dp ON (d.id_deporte = dp.id) LEFT JOIN ramas ON (d.id_rama = ramas.id) WHERE d.id_usuairo = $id_usuario AND c.id = $ciclo AND id_funcion = $funcion ";
     if($deporte > 0){
         $query.= "AND id_deporte = $deporte ";
     }
