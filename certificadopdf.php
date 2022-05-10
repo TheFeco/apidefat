@@ -76,7 +76,6 @@ if($id_prueba != 0){
 if($cct != 0){
     $consulta .= "AND d.cct = '$cct' "; 
 }
-die($consulta);
 $resultado = $conexion->prepare($consulta);
 $resultado->execute();
 if($resultado->rowCount() >= 1){
