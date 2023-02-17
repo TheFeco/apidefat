@@ -30,6 +30,25 @@ class Conexion{
         $jsondata = file_get_contents($direccion . "/". "config");
         return json_decode($jsondata, true);
     }
+
+    public function obtenerDatos($sqlstr){
+        $objeto = new Conexion();
+        $conn = $objeto->Conectar();
+        $stmt = $conn->prepare($sqlstr);
+        $stmt->execute();
+        $resultArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->convertirUTF8($resultArray);
+
+    }
+
+    private function convertirUTF8($array){
+        array_walk_recursive($array,function(&$item,$key){
+            if(!mb_detect_encoding($item,'utf-8',true)){
+                $item = utf8_encode($item);
+            }
+        });
+        return $array;
+    }
 }
 
 
