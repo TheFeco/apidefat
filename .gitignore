@@ -1,3 +1,4 @@
-db/conexion.php
+# db/conexion.php
+db/config
 img/
 files/

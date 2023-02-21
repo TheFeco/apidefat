@@ -26,24 +26,53 @@ if($_POST['METHOD']=='POST'){
 
     $id_usuario    = $_POST["usuario"];
 
+    $actNacimiento = "";
+    $curpPdf = "";
+    $cerMedico = "";
+    $cartaResponsiva = "";
+    $ine = "";
+
+    
+
+    
+    if(isset($_FILES["actNacimiento"]) && $_FILES["actNacimiento"]["error"] == 0) {
+        $actNacimiento = guardarArchivo($_FILES["actNacimiento"]);
+    }
+
+    if(isset($_FILES["curpPdf"]) && $_FILES["curpPdf"]["error"] == 0) {
+        $curpPdf = guardarArchivo($_FILES["curpPdf"]);
+    }
+
+    if(isset($_FILES["cerMedico"]) && $_FILES["cerMedico"]["error"] == 0) {
+        $cerMedico = guardarArchivo($_FILES["cerMedico"]);
+    }
+
+    if(isset($_FILES["cartaResponsiva"]) && $_FILES["cartaResponsiva"]["error"] == 0) {
+        $cartaResponsiva = guardarArchivo($_FILES["cartaResponsiva"]);
+    }
+
+    if(isset($_FILES["ine"]) && $_FILES["ine"]["error"] == 0) {
+        $ine = guardarArchivo($_FILES["ine"]);
+    }
+
     switch ($funcion) {
         case '1':
-            $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_deporte, id_rama, id_prueba, id_categoria, id_peso, id_usuairo) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$deporte', '$rama', '$prueba', '$categoria', '$peso', '$id_usuario')"; 
+            $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_deporte, id_rama, id_prueba, id_categoria, id_peso, id_usuairo, acta_nacimiento, curp_pdf, cert_medico, carta_responsiva, ine) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$deporte', '$rama', '$prueba', '$categoria', '$peso', '$id_usuario', '$actNacimiento', '$curpPdf', '$cerMedico', '$cartaResponsiva', '$ine')"; 
             break;
         case '2':
-            $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_deporte, id_rama, id_usuairo) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$deporte', '$rama', '$id_usuario')";
+            $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_deporte, id_rama, id_usuairo, acta_nacimiento, curp_pdf, cert_medico, carta_responsiva, ine) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$deporte', '$rama', '$id_usuario', '$actNacimiento', '$curpPdf', '$cerMedico', '$cartaResponsiva', '$ine')";
             break;
         case '3':
-            $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_usuairo) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$id_usuario')";
+            $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_usuairo, acta_nacimiento, curp_pdf, cert_medico, carta_responsiva, ine) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$id_usuario', '$actNacimiento', '$curpPdf', '$cerMedico', '$cartaResponsiva', '$ine')";
             break;
         case '4':
-            $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_deporte, id_usuairo) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$deporte', '$id_usuario')";
+            $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_deporte, id_usuairo, acta_nacimiento, curp_pdf, cert_medico, carta_responsiva, ine) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$deporte', '$id_usuario', '$actNacimiento', '$curpPdf', '$cerMedico', '$cartaResponsiva', '$ine')";
             break;
         case '5':
-            $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_usuairo) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$id_usuario')";
+            $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_usuairo, acta_nacimiento, curp_pdf, cert_medico, carta_responsiva, ine) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$id_usuario', '$actNacimiento', '$curpPdf', '$cerMedico', '$cartaResponsiva', '$ine')";
             break;
         case '6':
-            $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_deporte, id_usuairo) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$deporte', '$id_usuario')";
+            $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_deporte, id_usuairo, acta_nacimiento, curp_pdf, cert_medico, carta_responsiva, ine) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$deporte', '$id_usuario', '$actNacimiento', '$curpPdf', '$cerMedico', '$cartaResponsiva', '$ine')";
             break;
     }
 
@@ -58,6 +87,7 @@ if($_POST['METHOD']=='POST'){
             $conexion->beginTransaction();
                 $resultado = $conexion->prepare($query);
                 $resultado->execute();
+                //print_r($resultado->errorInfo());
                 $LAST_ID = $conexion->lastInsertId();
                 
             $conexion->commit();
@@ -80,7 +110,6 @@ if($_POST['METHOD']=='POST'){
         $subirFoto = move_uploaded_file($_FILES["foto"]["tmp_name"], $ruta);
         if($subirFoto){
             $query2 = "UPDATE deportistas SET folio='$folio', foto='$ruta' WHERE id = $LAST_ID";
-            // print_r($query2);
             $resultado = $conexion->prepare($query2);
             $resultado->execute();
             // print_r($resultado->errorInfo());
@@ -101,4 +130,10 @@ if($_POST['METHOD']=='POST'){
         $conexion = NULL;
     }
 }
-?>
+
+function guardarArchivo($archivo) {
+    $nombreArchivo = uniqid()."_".$archivo["name"];
+    $rutaArchivo = "files/".$nombreArchivo;
+    move_uploaded_file($archivo["tmp_name"], $rutaArchivo);
+    return $rutaArchivo;
+}

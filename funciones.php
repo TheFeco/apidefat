@@ -20,6 +20,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
             GROUP BY dp.escuela, c.nombre, f.nombre, d.nombre, r.nombre
             ORDER BY c.nombre, f.nombre DESC 
         ";
+        
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
         if($resultado->rowCount() >= 1){
@@ -43,7 +44,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
         $funciones=null;
     }
     //Traemon el ulltimo ciclo escolar
-    $consultaCiclos = "SELECT id, nombre FROM ciclos ORDER BY id DESC LIMIT 1";
+    $consultaCiclos = "SELECT id, nombre FROM ciclos ORDER BY id DESC LIMIT 5";
     $resultado = $conexion->prepare($consultaCiclos);
     $resultado->execute();
     $ciclos=$resultado->fetchAll(PDO::FETCH_ASSOC);

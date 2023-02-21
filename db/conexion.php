@@ -41,6 +41,20 @@ class Conexion{
 
     }
 
+    public function nonQueryId($sqlstr) {
+        $objeto = new Conexion();
+        $conn = $objeto->Conectar();
+        $stmt = $conn->prepare($sqlstr);
+        $stmt->execute();
+        $filas = $stmt->rowCount();
+        if ($filas >= 1) {
+            return $conn->lastInsertId();
+        } else {
+            return 0;
+        }
+    }  
+    
+
     private function convertirUTF8($array){
         array_walk_recursive($array,function(&$item,$key){
             if(!mb_detect_encoding($item,'utf-8',true)){
