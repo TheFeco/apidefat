@@ -5,7 +5,6 @@ header('Access-Control-Allow-Origin: *');
 $objeto = new Conexion();
 $conexion = $objeto->Conectar();
 
-header('Access-Control-Allow-Origin: *');
 if($_SERVER['REQUEST_METHOD']=='GET'){
     if(isset($_GET['id_usuario'])){
         $id_usuario=$_GET['id_usuario'];
@@ -36,14 +35,15 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
         if($id_rama != 0){
             $consulta .= "AND d.id_rama = '$id_rama' "; 
         }
-        // die($consulta);
+
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
+        
         if($resultado->rowCount() >= 1){
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
         }else{
-            $d = array('menssage' => 'No se encontro ningun dato.');
-            header("HTTP/1.1 500 OK");
+            $d = array('menssage' => 'Error al preparar la consulta.');
+            header("HTTP/1.1 500 Internal Server Error");
             return print json_encode($d);
             $conexion = NULL;
         }
@@ -52,8 +52,8 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
         return print json_encode($d);
         $conexion = NULL;
     }else{
-        $d = array('menssage' => 'Error al obtener las información');
-        header("HTTP/1.1 500 OK");
+        $d = array('menssage' => 'Error al obtener la información');
+        header("HTTP/1.1 500 Internal Server Error");
         return print json_encode($d);
         $conexion = NULL;
         

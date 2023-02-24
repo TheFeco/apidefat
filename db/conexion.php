@@ -52,7 +52,17 @@ class Conexion{
         } else {
             return 0;
         }
-    }  
+    }
+
+    public function nonQuery($sqlstr) {
+        $objeto = new Conexion();
+        $conn = $objeto->Conectar();
+        $stmt = $conn->prepare($sqlstr);
+        $stmt->execute();
+        // print_r($stmt->errorInfo());
+        return $stmt->rowCount();
+    }
+    
     
 
     private function convertirUTF8($array){

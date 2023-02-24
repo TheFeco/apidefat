@@ -111,7 +111,8 @@ if($_POST['METHOD']=='POST'){
         $query.= "AND id_prueba = $prueba ";
     }
     $query.= "GROUP BY d.escuela, ciclo, funcion, deporte ";
-    
+    // print_r($query);
+    // die();
     $resultado = $conexion->prepare($query);
     $resultado->execute();
     $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
