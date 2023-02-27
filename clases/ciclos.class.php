@@ -67,7 +67,8 @@ class ciclos extends conexion {
     private function insertarCiclo(){
         $query = "INSERT INTO " . $this->table . " (Nombre)
         values
-        ('" . $this->nombre . "')"; 
+        ('" . $this->nombre . "')";
+    print_r($query);
         $resp = parent::nonQueryId($query);
         if($resp){
              return $resp;
