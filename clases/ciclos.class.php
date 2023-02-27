@@ -9,14 +9,14 @@ class ciclos extends conexion {
     private $nombre  = "";
     public function obtener($token){
         $_respuestas = new respuestas;
-        var_dump($token.'ya estoy dentro de la clase');
+        
         if(!$token){
             return $_respuestas->error_401();
         }
 
         $this->token = $token;
         $arrayToken =   $this->buscarToken();
-        print_r("putos");
+        var_dump('putos');
         if($arrayToken){
 
             $query = "SELECT id, nombre FROM ciclos ORDER BY id DESC";
