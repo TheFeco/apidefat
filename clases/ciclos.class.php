@@ -15,6 +15,8 @@ class ciclos extends conexion {
         }
 
         $this->token = $token;
+        var_dump($this->token);
+        var_dump('putos');
         $arrayToken =   $this->buscarToken();
         var_dump('putos');
         if($arrayToken){
