@@ -38,6 +38,7 @@ class Conexion{
         $stmt->execute();
         print_r($stmt->errorInfo());
         $resultArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        print_r($resultArray);
         return $this->convertirUTF8($resultArray);
 
     }
