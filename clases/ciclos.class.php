@@ -16,6 +16,7 @@ class ciclos extends conexion {
 
         $this->token = $token;
         $arrayToken =   $this->buscarToken();
+        print_r("putos");
         if($arrayToken){
 
             $query = "SELECT id, nombre FROM ciclos ORDER BY id DESC";
