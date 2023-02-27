@@ -67,7 +67,7 @@ class ciclos extends conexion {
         $query = "INSERT INTO " . $this->table . " (Nombre)
         values
         ('" . $this->nombre . "')";
-        print_r($query);
+
         $resp = parent::nonQueryId($query);
         if($resp){
              return $resp;
@@ -80,7 +80,7 @@ class ciclos extends conexion {
         $query = "SELECT  TokenId,UsuarioId,Estado from usuarios_token WHERE Token = '" . $this->token . "' AND Estado = 'Activo'";
         
         $resp = parent::obtenerDatos($query);
-        
+
         if($resp){
             return $resp;
         }else{
