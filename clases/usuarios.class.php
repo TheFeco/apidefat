@@ -27,7 +27,7 @@ class usuarios extends conexion {
 
             $query = "SELECT id, usuario, Estado FROM " . $this->table . " WHERE id != 1 ORDER BY id_rol";
             print_r($query);
-            return print_r($query);//parent::obtenerDatos($query);
+            return parent::obtenerDatos($query);
 
         }else{
             return $_respuestas->error_401("El Token que envio es invalido o ha caducado");
