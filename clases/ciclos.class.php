@@ -79,8 +79,9 @@ class ciclos extends conexion {
 
     private function buscarToken(){
         $query = "SELECT  TokenId,UsuarioId,Estado from usuarios_token WHERE Token = '" . $this->token . "' AND Estado = 'Activo'";
-        print_r($query);
+        
         $resp = parent::obtenerDatos($query);
+        print_r($resp);
         if($resp){
             return $resp;
         }else{
