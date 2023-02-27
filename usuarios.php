@@ -12,12 +12,9 @@ $_usuarios =  new usuarios;
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     if (isset($_GET['id'])) {
-        print_r("con id");
         $datosArray = $_usuarios->obtenerConId($_GET["id"], $_GET["token"]);
     } else {
-        print_r("sin id");
         $datosArray = $_usuarios->obtener($_GET["token"]);
-        print_r($datosArray);
     }
     //delvovemos una respuesta 
     header('Content-Type: application/json');

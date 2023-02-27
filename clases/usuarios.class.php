@@ -26,7 +26,7 @@ class usuarios extends conexion {
         if($arrayToken){
 
             $query = "SELECT id, usuario, Estado FROM " . $this->table . " WHERE id != 1 ORDER BY id_rol";
-            die($query);
+
             return parent::obtenerDatos($query);
 
         }else{
