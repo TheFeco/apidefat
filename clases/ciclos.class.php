@@ -17,7 +17,7 @@ class ciclos extends conexion {
         $this->token = $token;
 
         $arrayToken =   $this->buscarToken();
-        
+
         if($arrayToken){
 
             $query = "SELECT id, nombre FROM ciclos ORDER BY id DESC";
@@ -80,7 +80,7 @@ class ciclos extends conexion {
         $query = "SELECT  TokenId,UsuarioId,Estado from usuarios_token WHERE Token = '" . $this->token . "' AND Estado = 'Activo'";
         
         $resp = parent::obtenerDatos($query);
-        print_r($resp);
+        
         if($resp){
             return $resp;
         }else{
