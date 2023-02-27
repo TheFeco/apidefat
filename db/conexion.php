@@ -46,6 +46,7 @@ class Conexion{
         $conn = $objeto->Conectar();
         $stmt = $conn->prepare($sqlstr);
         $stmt->execute();
+        // print_r($stmt->errorInfo());
         $filas = $stmt->rowCount();
         if ($filas >= 1) {
             return $conn->lastInsertId();
@@ -72,6 +73,12 @@ class Conexion{
             }
         });
         return $array;
+    }
+
+    //encriptar
+
+    protected function encriptar($string){
+        return md5($string);
     }
 }
 
