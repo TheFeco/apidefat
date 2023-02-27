@@ -9,7 +9,7 @@ class ciclos extends conexion {
     private $nombre  = "";
     public function obtener($token){
         $_respuestas = new respuestas;
-
+        var_dump($token.'ya estoy dentro de la clase');
         if(!$token){
             return $_respuestas->error_401();
         }
