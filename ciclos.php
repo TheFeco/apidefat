@@ -10,7 +10,7 @@ $_respuestas = new respuestas;
 $_ciclos =  new ciclos;
 
 if($_SERVER['REQUEST_METHOD']=='GET'){   
-    
+    var_dump($_GET["token"]);
     $datosArray = $_ciclos->obtener($_GET["token"]);
     //delvovemos una respuesta 
      header('Content-Type: application/json');
