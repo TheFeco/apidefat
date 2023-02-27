@@ -36,6 +36,7 @@ class Conexion{
         $conn = $objeto->Conectar();
         $stmt = $conn->prepare($sqlstr);
         $stmt->execute();
+        print_r($stmt->errorInfo());
         $resultArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $this->convertirUTF8($resultArray);
 
