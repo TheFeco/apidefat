@@ -31,10 +31,9 @@ if($_POST['METHOD']=='POST'){
     $cerMedico = "";
     $cartaResponsiva = "";
     $ine = "";
+    $constanciaAutorizacion = "";
+    $constanciaServicio = "";
 
-    
-
-    
     if(isset($_FILES["actNacimiento"]) && $_FILES["actNacimiento"]["error"] == 0) {
         $actNacimiento = guardarArchivo($_FILES["actNacimiento"]);
     }
@@ -55,24 +54,32 @@ if($_POST['METHOD']=='POST'){
         $ine = guardarArchivo($_FILES["ine"]);
     }
 
+    if(isset($_FILES["constanciaAutorizacion"]) && $_FILES["constanciaAutorizacion"]["error"] == 0) {
+        $constanciaAutorizacion = guardarArchivo($_FILES["constanciaAutorizacion"]);
+    }
+
+    if(isset($_FILES["constanciaServicio"]) && $_FILES["constanciaServicio"]["error"] == 0) {
+        $constanciaServicio = guardarArchivo($_FILES["constanciaServicio"]);
+    }
+
     switch ($funcion) {
         case '1':
-            $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_deporte, id_rama, id_prueba, id_categoria, id_peso, id_usuairo, acta_nacimiento, curp_pdf, cert_medico, carta_responsiva, ine) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$deporte', '$rama', '$prueba', '$categoria', '$peso', '$id_usuario', '$actNacimiento', '$curpPdf', '$cerMedico', '$cartaResponsiva', '$ine')"; 
+            $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_deporte, id_rama, id_prueba, id_categoria, id_peso, id_usuairo, acta_nacimiento, curp_pdf, cert_medico, carta_responsiva, ine, constancia_autorizacion, constancia_servicio) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$deporte', '$rama', '$prueba', '$categoria', '$peso', '$id_usuario', '$actNacimiento', '$curpPdf', '$cerMedico', '$cartaResponsiva', '$ine', '$constanciaAutorizacion', '$constanciaServicio')"; 
             break;
         case '2':
-            $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_deporte, id_rama, id_usuairo, acta_nacimiento, curp_pdf, cert_medico, carta_responsiva, ine) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$deporte', '$rama', '$id_usuario', '$actNacimiento', '$curpPdf', '$cerMedico', '$cartaResponsiva', '$ine')";
+            $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_deporte, id_rama, id_usuairo, acta_nacimiento, curp_pdf, cert_medico, carta_responsiva, ine, constancia_autorizacion, constancia_servicio) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$deporte', '$rama', '$id_usuario', '$actNacimiento', '$curpPdf', '$cerMedico', '$cartaResponsiva', '$ine', '$constanciaAutorizacion', '$constanciaServicio')";
             break;
         case '3':
-            $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_usuairo, acta_nacimiento, curp_pdf, cert_medico, carta_responsiva, ine) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$id_usuario', '$actNacimiento', '$curpPdf', '$cerMedico', '$cartaResponsiva', '$ine')";
+            $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_usuairo, acta_nacimiento, curp_pdf, cert_medico, carta_responsiva, ine, constancia_autorizacion, constancia_servicio) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$id_usuario', '$actNacimiento', '$curpPdf', '$cerMedico', '$cartaResponsiva', '$ine', '$constanciaAutorizacion', '$constanciaServicio')";
             break;
         case '4':
-            $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_deporte, id_usuairo, acta_nacimiento, curp_pdf, cert_medico, carta_responsiva, ine) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$deporte', '$id_usuario', '$actNacimiento', '$curpPdf', '$cerMedico', '$cartaResponsiva', '$ine')";
+            $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_deporte, id_usuairo, acta_nacimiento, curp_pdf, cert_medico, carta_responsiva, ine, constancia_autorizacion, constancia_servicio) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$deporte', '$id_usuario', '$actNacimiento', '$curpPdf', '$cerMedico', '$cartaResponsiva', '$ine', '$constanciaAutorizacion', '$constanciaServicio')";
             break;
         case '5':
-            $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_usuairo, acta_nacimiento, curp_pdf, cert_medico, carta_responsiva, ine) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$id_usuario', '$actNacimiento', '$curpPdf', '$cerMedico', '$cartaResponsiva', '$ine')";
+            $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_usuairo, acta_nacimiento, curp_pdf, cert_medico, carta_responsiva, ine, constancia_autorizacion, constancia_servicio) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$id_usuario', '$actNacimiento', '$curpPdf', '$cerMedico', '$cartaResponsiva', '$ine', '$constanciaAutorizacion', '$constanciaServicio')";
             break;
         case '6':
-            $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_deporte, id_usuairo, acta_nacimiento, curp_pdf, cert_medico, carta_responsiva, ine) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$deporte', '$id_usuario', '$actNacimiento', '$curpPdf', '$cerMedico', '$cartaResponsiva', '$ine')";
+            $query = "INSERT into deportistas (nombre, apellidos, fh_nacimiento, curp, cct, escuela, turno, id_municipio, zona, id_nivel, id_ciclo, id_funcion, id_deporte, id_usuairo, acta_nacimiento, curp_pdf, cert_medico, carta_responsiva, ine, constancia_autorizacion, constancia_servicio) VALUES ('$nombre','$apellidos','$fh_nacimiento','$curp','$cct','$escuela', '$turno', '$municipio','$zona','$nivel', '$ciclo', '$funcion', '$deporte', '$id_usuario', '$actNacimiento', '$curpPdf', '$cerMedico', '$cartaResponsiva', '$ine', '$constanciaAutorizacion', '$constanciaServicio')";
             break;
     }
 
