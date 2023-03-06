@@ -149,7 +149,7 @@ $mpdf->defaultfooterline = 0;
 $mpdf->SetDisplayMode('fullpage');
 $mpdf->SetHeader('
 <div id="inner">
-    <img src="imagenes/banner.png" width="100%">
+    <img src="imagenes/Cintillo.jpg" width="100%">
     <h2>Juegos Deportivos Escolares de la Educación Básica '.$ciclo.'</h2>
     <h3>'.$deporte.'</h3>				
 </div>');
