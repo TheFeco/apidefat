@@ -81,6 +81,13 @@ class Conexion{
     protected function encriptar($string){
         return md5($string);
     }
+
+    public function baseUrl(){
+        $base_url = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off") ? "https" : "http");
+        $base_url .= "://".$_SERVER['HTTP_HOST'];
+        $base_url .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+        return $base_url;
+    }
 }
 
 
@@ -97,9 +104,3 @@ function metodoGet($query){
     }
 }
 
-function baseUrl(){
-    $base_url = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off") ? "https" : "http");
-    $base_url .= "://".$_SERVER['HTTP_HOST'];
-    $base_url .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
-    return $base_url;
-}
