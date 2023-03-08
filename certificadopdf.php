@@ -134,8 +134,7 @@ $html .= '
     ';
 }
 $html .= '</table>';
-print_r($html);
-die();
+
 $mpdf = new \Mpdf\Mpdf([
     'mode' => 'utf-8',
     'marginLeft' => 0,
@@ -144,8 +143,6 @@ $mpdf = new \Mpdf\Mpdf([
     'orientation' => 'P'
 ]);
 
-print_r($html);
-die();
 $stylesheet = file_get_contents('bootstrap.min.css');
 $stylesheet = file_get_contents('resume.css');
 $mpdf->WriteHTML($stylesheet,1);
