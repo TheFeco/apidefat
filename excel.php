@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $conexion = NULL;
     }
         $temp_file = 'files/tmp/ExportarTodo.csv';
-        
+        var_dump($temp_file);
          $output= outputCsv($data, $temp_file);
          var_dump($output);
         
