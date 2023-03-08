@@ -9,10 +9,9 @@ $objeto = new Conexion();
 $conexion = $objeto->Conectar();
 
 $baseURL = $objeto->baseUrl();
-print_r("hola mundo");
-die();
+
 if($_POST['METHOD']=='POST'){
-    print_r("hola mundo");
+    print_r("hola mundo Post");
     die();
     //Variables del post
     $id_usuario = isset($_POST['usuario']) ? $_POST['usuario'] : 2;
