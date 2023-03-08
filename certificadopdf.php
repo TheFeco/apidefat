@@ -91,8 +91,6 @@ if($resultado->rowCount() >= 1){
     $conexion = NULL;
 }
 
-print_r($data);
-die();
 $html = '';
 $html .= '<table>';
 
