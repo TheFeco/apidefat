@@ -47,12 +47,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         return print json_encode($d);
         $conexion = NULL;
     }
-        $temp_file = 'files/ExportarTodo.csv';
-        var_dump($temp_file);
+        $temp_file = 'files/tmp/ExportarTodo.csv';
         
-         $output= outputCsv($data, $temp_file);
-         var_dump($output);
-         die();
+         $ouput= outputCsv($data, $temp_file);
         
         exit;
 }
