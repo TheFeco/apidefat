@@ -24,13 +24,13 @@ if($_POST['METHOD']=='POST'){
 
     //Consultas de Mysql que trae
     $consulta = "SELECT d.folio, UPPER(d.nombre) AS nombre, UPPER(d.apellidos) AS apellidos , d.curp, DATE_FORMAT(d.fh_nacimiento,'%d/%m/%Y') AS fh_nacimeinto, d.cct, d.escuela, d.zona, CASE WHEN turno = 1 THEN 'Matutino' WHEN turno = 2 THEN 'vespertino' END AS turno,c.nombre AS ciclo, m.nombre AS municipio, f.nombre AS funcion, dp.nombre AS deporte, r.nombre AS rama, cat.nombre AS categoria, peso.nombre AS peso, pruebas.nombre AS prueba,
-    CONCAT('$baseURL', IFNULL(d.acta_nacimiento, '')) AS acta_nacimiento,
-    CONCAT('$baseURL', IFNULL(d.curp_pdf, '')) AS curp_pdf,
-    CONCAT('$baseURL', IFNULL(d.cert_medico, '')) AS cert_medico,
-    CONCAT('$baseURL', IFNULL(d.carta_responsiva, '')) AS carta_responsiva,
-    CONCAT('$baseURL', IFNULL(d.ine, '')) AS ine,
-    CONCAT('$baseURL', IFNULL(d.constancia_autorizacion, '')) AS constancia_autorizacion,
-    CONCAT('$baseURL', IFNULL(d.constancia_servicio, '')) AS constancia_servicio
+    CONCAT(CASE WHEN d.acta_nacimiento <> '' THEN '$baseURL' ELSE '' END, d.acta_nacimiento) AS acta_nacimiento,
+    CONCAT(CASE WHEN d.curp_pdf <> '' THEN '$baseURL' ELSE '' END, d.curp_pdf) AS curp_pdf,
+    CONCAT(CASE WHEN d.cert_medico <> '' THEN '$baseURL' ELSE '' END, d.cert_medico) AS cert_medico,
+    CONCAT(CASE WHEN d.carta_responsiva <> '' THEN '$baseURL' ELSE '' END, d.carta_responsiva) AS carta_responsiva,
+    CONCAT(CASE WHEN d.ine <> '' THEN '$baseURL' ELSE '' END, d.ine) AS ine,
+    CONCAT(CASE WHEN d.constancia_autorizacion <> '' THEN '$baseURL' ELSE '' END, d.constancia_autorizacion) AS constancia_autorizacion,
+    CONCAT(CASE WHEN d.constancia_servicio <> '' THEN '$baseURL' ELSE '' END, d.constancia_servicio) AS constancia_servicio
     FROM deportistas AS d 
     INNER JOIN ciclos AS c ON (d.id_ciclo = c.id) 
     INNER JOIN funciones AS f  ON (d.id_funcion = f.id) 
