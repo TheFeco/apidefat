@@ -2,6 +2,8 @@
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 header('Access-Control-Allow-Headers: Content-Type');
+header('Content-Type: text/csv');
+header('Content-Disposition: attachment; filename="ExportarTodo.csv"');
 
 include_once 'db/conexion.php';
 $objeto = new Conexion();
@@ -56,4 +58,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
+}
+
+function outputCsv( $assocDataArray, $temp_file ) {
+    if ( !empty( $assocDataArray ) ):
+        $fp = fopen( $temp_file, 'w' );
+        fputs( $fp, $bom = chr(0xEF) . chr(0xBB) . chr(0xBF) );
+        fputcsv( $fp, array_keys( reset($assocDataArray) ) );
+
+        foreach ( $assocDataArray AS $values ):
+            fputcsv( $fp, $values );
+        endforeach;
+
+        fclose( $fp );
+    endif;
+    $d = array("file" => $temp_file, "name" => 'ExportExcel.csv' );
+    header("HTTP/1.1 200 OK");
+    return print json_encode($d);
+    exit();
 }
