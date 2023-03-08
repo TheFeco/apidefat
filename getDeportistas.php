@@ -42,7 +42,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
         if($resultado->rowCount() >= 1){
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
         }else{
-            $d = array('menssage' => 'Error al preparar la consulta.');
+            $d = array('menssage' => 'No se ecnontro ningun registro');
             header("HTTP/1.1 500 Internal Server Error");
             return print json_encode($d);
             $conexion = NULL;
