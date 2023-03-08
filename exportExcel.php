@@ -3,6 +3,7 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: text/csv');
+
 include_once 'db/conexion.php';
 $objeto = new Conexion();
 $conexion = $objeto->Conectar();
@@ -60,7 +61,8 @@ if($_POST['METHOD']=='POST'){
     if($id_prueba != 0){
         $consulta .= "AND d.id_prueba = '$id_prueba' "; 
     }
-
+    print_r($consulta);
+    die();
     $resultado = $conexion->prepare($consulta);
     $resultado->execute();
     $rows = $resultado->rowCount();
