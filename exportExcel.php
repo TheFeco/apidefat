@@ -11,6 +11,8 @@ $conexion = $objeto->Conectar();
 $baseURL = $objeto->baseUrl();
 
 if($_POST['METHOD']=='POST'){
+    print_r($_POST);
+    die();
     //Variables del post
     $id_usuario = isset($_POST['usuario']);
     $cct = isset($_POST['cct']) ? $_POST['cct'] : 0;
