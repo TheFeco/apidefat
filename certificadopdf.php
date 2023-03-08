@@ -141,6 +141,9 @@ $mpdf = new \Mpdf\Mpdf([
     'marginTop' => 0,
     'orientation' => 'P'
 ]);
+
+print_r($html);
+die();
 $stylesheet = file_get_contents('bootstrap.min.css');
 $stylesheet = file_get_contents('resume.css');
 $mpdf->WriteHTML($stylesheet,1);
