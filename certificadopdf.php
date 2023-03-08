@@ -33,9 +33,6 @@ foreach( $rows as $row ) {
         $ciclo = $row["nombre"];
 }
 
-print_r($ciclo);
-die();
-
 //obtenemos el nombre del deporte
 $deporte ="";
 $consultaDeporte = "SELECT id, nombre FROM deportes WHERE id =".$id_deporte;
@@ -79,6 +76,9 @@ if($id_prueba != 0){
 if($cct != 0){
     $consulta .= "AND d.cct = '$cct' "; 
 }
+
+print_r($consulta);
+die();
 $resultado = $conexion->prepare($consulta);
 $resultado->execute();
 if($resultado->rowCount() >= 1){
