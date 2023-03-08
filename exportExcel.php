@@ -12,7 +12,7 @@ $baseURL = $objeto->baseUrl();
 
 if($_POST['METHOD']=='POST'){
     //Variables del post
-    $id_usuario = isset($_POST['id_usuario']);
+    $id_usuario = $_POST['id_usuario'];
     $cct = isset($_POST['cct']) ? $_POST['cct'] : 0;
     $id_ciclo = isset($_POST['id_ciclo']) ? $_POST['id_ciclo'] : 1;
     $id_funcion = isset($_POST['id_funcion']) ? $_POST['id_funcion'] : 0;
