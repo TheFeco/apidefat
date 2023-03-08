@@ -166,6 +166,8 @@ $mpdf->SetColumns($colums);
 $mpdf->WriteHTML($html);
 $mpdf->AddColumn();
 $name = 'cedulas-' . md5(uniqid(mt_rand(), true)) . '.pdf';
+print_r($name);
+die();
 $filename = "files/tmp/";
 if (!file_exists($filename)) {
     mkdir($filename, 0777, true);
