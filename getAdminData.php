@@ -110,7 +110,7 @@ if($_POST['METHOD']=='POST'){
     if($prueba > 0){
         $query.= "AND id_prueba = $prueba ";
     }
-    $query.= "GROUP BY d.escuela, ciclo, funcion, deporte ";
+    $query.= "GROUP BY d.id_usuairo, d.escuela, d.cct, turno, d.id_ciclo, c.nombre, d.id_funcion, f.nombre, dp.nombre, d.id_deporte, d.id_rama, ramas.nombre, d.id_categoria, d.id_peso, d.id_prueba";
     // print_r($query);
     // die();
     $resultado = $conexion->prepare($query);

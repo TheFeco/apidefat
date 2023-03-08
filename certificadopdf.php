@@ -9,7 +9,8 @@ $conexion = $objeto->Conectar();
 header('Access-Control-Allow-Origin: *');
 
 if($_POST['METHOD']=='POST'){
-
+print_r("entre me la chuoas cros");
+die();
 $id_usuario = isset($_POST['usuario']) ? $_POST['usuario'] : 0;
 $id_ciclo = isset($_POST['ciclo']) ? $_POST['ciclo'] : 1;
 $id_funcion = isset($_POST['funcion']) ? $_POST['funcion'] : 0;
