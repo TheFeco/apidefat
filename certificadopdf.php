@@ -20,9 +20,6 @@ $id_peso = isset($_POST['peso']) ? $_POST['peso'] : 0;
 $id_prueba = isset($_POST['prueba']) ? $_POST['prueba'] : 0;
 $cct = isset($_POST['cct']) ? $_POST['cct'] : 0;
 
-print_r("entre me la chuoas cro2s");
-die();
-
 // Variables para el pdf
 $colums = 2;
 
@@ -35,6 +32,9 @@ $rows=$resultado->fetchAll(PDO::FETCH_ASSOC);
 foreach( $rows as $row ) {
         $ciclo = $row["nombre"];
 }
+
+print_r($ciclo);
+die();
 
 //obtenemos el nombre del deporte
 $deporte ="";
