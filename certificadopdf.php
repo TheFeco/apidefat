@@ -9,8 +9,7 @@ $conexion = $objeto->Conectar();
 header('Access-Control-Allow-Origin: *');
 
 if($_POST['METHOD']=='POST'){
-print_r("entre me la chuoas cros");
-die();
+
 $id_usuario = isset($_POST['usuario']) ? $_POST['usuario'] : 0;
 $id_ciclo = isset($_POST['ciclo']) ? $_POST['ciclo'] : 1;
 $id_funcion = isset($_POST['funcion']) ? $_POST['funcion'] : 0;
@@ -20,6 +19,9 @@ $id_categoria = isset($_POST['categoria']) ? $_POST['categoria'] : 0;
 $id_peso = isset($_POST['peso']) ? $_POST['peso'] : 0;
 $id_prueba = isset($_POST['prueba']) ? $_POST['prueba'] : 0;
 $cct = isset($_POST['cct']) ? $_POST['cct'] : 0;
+
+print_r("entre me la chuoas cro2s");
+die();
 
 // Variables para el pdf
 $colums = 2;
