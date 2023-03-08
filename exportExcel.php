@@ -60,8 +60,7 @@ if($_POST['METHOD']=='POST'){
     if($id_prueba != 0){
         $consulta .= "AND d.id_prueba = '$id_prueba' "; 
     }
-    print_r($consulta);
-    die();
+
     $resultado = $conexion->prepare($consulta);
     $resultado->execute();
     $rows = $resultado->rowCount();
