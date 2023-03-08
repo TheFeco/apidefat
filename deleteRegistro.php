@@ -2,7 +2,7 @@
 include_once 'db/conexion.php';
 $objeto = new Conexion();
 $conexion = $objeto->Conectar();
-$url = baseUrl();
+$url = $objeto->baseUrl();
 header('Access-Control-Allow-Origin: *');
 if($_POST['METHOD']=='DELETE'){
     unset($_POST['METHOD']);
