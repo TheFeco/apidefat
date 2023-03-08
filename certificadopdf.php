@@ -77,8 +77,6 @@ if($cct != 0){
     $consulta .= "AND d.cct = '$cct' "; 
 }
 
-print_r($consulta);
-die();
 $resultado = $conexion->prepare($consulta);
 $resultado->execute();
 if($resultado->rowCount() >= 1){
@@ -92,6 +90,9 @@ if($resultado->rowCount() >= 1){
     return print json_encode($d);
     $conexion = NULL;
 }
+
+print_r($data);
+die();
 $html = '';
 $html .= '<table>';
 
