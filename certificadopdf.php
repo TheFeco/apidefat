@@ -134,6 +134,8 @@ $html .= '
     ';
 }
 $html .= '</table>';
+print_r($html);
+die();
 $mpdf = new \Mpdf\Mpdf([
     'mode' => 'utf-8',
     'marginLeft' => 0,
