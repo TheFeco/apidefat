@@ -70,7 +70,7 @@ if($_POST['METHOD']=='POST'){
         return print json_encode($d);
         $conexion = NULL;
     }
-        $temp_file = 'files/tmp/ExportExcel.csv';
+        $temp_file = 'files/tmp/Excel.csv';
         
         outputCsv($data, $temp_file);
         
