@@ -49,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
         $temp_file = 'files/tmp/ExportarTodo.csv';
         var_dump($temp_file);
+        die();
          $output= outputCsv($data, $temp_file);
          var_dump($output);
         
