@@ -9,7 +9,8 @@ $objeto = new Conexion();
 $conexion = $objeto->Conectar();
 
 $baseURL = $objeto->baseUrl();
-
+print_r("hola mundo");
+die();
 if($_POST['METHOD']=='POST'){
     print_r("hola mundo");
     die();
