@@ -11,12 +11,10 @@ $conexion = $objeto->Conectar();
 $baseURL = $objeto->baseUrl();
 
 if($_POST['METHOD']=='POST'){
-    print_r($_POST);
-    die();
     //Variables del post
-    $id_usuario = isset($_POST['usuario']) ? $_POST['usuario'] : 2;
+    $id_usuario = isset($_POST['usuario']);
     $cct = isset($_POST['cct']) ? $_POST['cct'] : 0;
-    $id_ciclo = isset($_POST['ciclo']) ? $_POST['ciclo'] : 1;
+    $id_ciclo = isset($_POST['id_ciclo']) ? $_POST['id_ciclo'] : 1;
     $id_funcion = isset($_POST['id_funcion']) ? $_POST['id_funcion'] : 0;
     $id_deporte = isset($_POST['id_deporte']) ? $_POST['id_deporte'] : 0;
     $id_rama = isset($_POST['id_rama']) ? $_POST['id_rama'] : 0;
