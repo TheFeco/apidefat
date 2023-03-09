@@ -7,10 +7,10 @@ $_POST['METHOD']='POST';
 if($_POST['METHOD']=='POST'){
     print_r($_POST);
     //Variables del post
-    $id_usuario = isset($_POST['usuario']) ? $_POST['usuario'] : 2;
+    $id_usuario = $_POST['usuario'];
     $id_ciclo = isset($_POST['ciclo']) ? $_POST['ciclo'] : 1;
-    $id_funcion = isset($_POST['funcion']) ? $_POST['funcion'] : 1;
-    $id_deporte = isset($_POST['deporte']) ? $_POST['deporte'] : 2;
+    $id_funcion = isset($_POST['funcion']) ? $_POST['funcion'] : 0;
+    $id_deporte = isset($_POST['deporte']) ? $_POST['deporte'] : 0;
     $id_rama = isset($_POST['rama']) ? $_POST['rama'] : 0;
     $id_categoria = isset($_POST['categoria']) ? $_POST['categoria'] : 0;
     $id_peso = isset($_POST['peso']) ? $_POST['peso'] : 0;
