@@ -39,18 +39,12 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
         
-        if($resultado->rowCount() >= 1){
-            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
-        }else{
-            $d = array('menssage' => 'No se ecnontro ningun registro');
-            header("HTTP/1.1 500 Internal Server Error");
-            return print json_encode($d);
-            $conexion = NULL;
-        }
+        $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
         $d = array('registros' => $data);
         header("HTTP/1.1 200 OK");
         return print json_encode($d);
         $conexion = NULL;
+        
     }else{
         $d = array('menssage' => 'Error al obtener la información');
         header("HTTP/1.1 500 Internal Server Error");
