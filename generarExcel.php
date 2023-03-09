@@ -4,7 +4,7 @@ $objeto = new Conexion();
 $conexion = $objeto->Conectar();
 header('Access-Control-Allow-Origin: *');
 $_POST['METHOD']='POST';
-
+if($_POST['METHOD']=='POST'){
     //Variables del post
     $id_usuario = $_POST['usuario'];
     $id_ciclo = isset($_POST['ciclo']) ? $_POST['ciclo'] : 1;
@@ -52,7 +52,7 @@ $_POST['METHOD']='POST';
     if($id_prueba != 0){
         $consulta .= "AND d.id_prueba = '$id_prueba' "; 
     }
-
+    
     $resultado = $conexion->prepare($consulta);
     $resultado->execute();
     $rows = $resultado->rowCount();
