@@ -4,6 +4,7 @@ $objeto = new Conexion();
 $conexion = $objeto->Conectar();
 header('Access-Control-Allow-Origin: *');
 $_POST['METHOD']='POST';
+$baseURL = $objeto->baseUrl();
 if($_POST['METHOD']=='POST'){
     //Variables del post
     $id_usuario = $_POST['usuario'];
