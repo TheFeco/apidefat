@@ -10,15 +10,15 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
     if(isset($_GET['id'])){
         $id = $_GET['id'];
         $consulta = "
-            SELECT dp.escuela, dp.cct, dp.id_ciclo, c.nombre AS ciclo, dp.id_funcion, f.nombre AS funcion, dp.id_deporte, d.nombre AS deporte, dp.id_rama, r.nombre AS rama
-            FROM deportistas AS dp 
-            INNER JOIN ciclos AS c ON (dp.id_ciclo = c.id) 
-            INNER JOIN funciones AS f ON ( dp.id_funcion = f.id)
-            LEFT JOIN deportes AS d ON (dp.id_deporte = d.id)
-            LEFT JOIN ramas  AS r ON (dp.id_rama = r.id)
-            WHERE dp.id_usuairo = '$id' 
-            GROUP BY dp.escuela, c.nombre, f.nombre, d.nombre, r.nombre
-            ORDER BY c.nombre, f.nombre DESC 
+        SELECT dp.escuela, dp.cct, dp.id_ciclo, c.nombre AS ciclo, dp.id_funcion, f.nombre AS funcion, dp.id_deporte, d.nombre AS deporte, dp.id_rama, r.nombre AS rama
+        FROM deportistas AS dp 
+        INNER JOIN ciclos AS c ON (dp.id_ciclo = c.id) 
+        INNER JOIN funciones AS f ON ( dp.id_funcion = f.id)
+        LEFT JOIN deportes AS d ON (dp.id_deporte = d.id)
+        LEFT JOIN ramas  AS r ON (dp.id_rama = r.id)
+        WHERE dp.id_usuairo = '$id' 
+        GROUP BY dp.escuela, dp.cct, dp.id_ciclo, c.nombre, dp.id_funcion, f.nombre, dp.id_deporte, d.nombre, dp.id_rama, r.nombre
+        ORDER BY c.nombre, f.nombre DESC
         ";
         
         $resultado = $conexion->prepare($consulta);

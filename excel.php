@@ -19,13 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     END AS turno, c.nombre AS ciclo, m.nombre AS municipio, f.nombre AS funcion,
     dp.nombre AS deporte, r.nombre AS rama, cat.nombre AS categoria, 
     peso.nombre AS peso, pruebas.nombre AS prueba,
-    CONCAT('$baseURL', d.acta_nacimiento) AS acta_nacimiento, 
-    CONCAT('$baseURL', d.curp_pdf) AS curp_pdf, 
-    CONCAT('$baseURL', d.cert_medico) AS cert_medico, 
-    CONCAT('$baseURL', d.carta_responsiva) AS carta_responsiva, 
-    CONCAT('$baseURL', d.ine) AS ine, 
-    CONCAT('$baseURL', d.constancia_autorizacion) AS constancia_autorizacion, 
-    CONCAT('$baseURL', d.constancia_servicio) AS constancia_servicio
+    CONCAT(CASE WHEN d.curp_pdf <> '' THEN '$baseURL' ELSE '' END, d.curp_pdf) AS curp_pdf,
+    CONCAT(CASE WHEN d.cert_medico <> '' THEN '$baseURL' ELSE '' END, d.cert_medico) AS cert_medico,
+    CONCAT(CASE WHEN d.carta_responsiva <> '' THEN '$baseURL' ELSE '' END, d.carta_responsiva) AS carta_responsiva,
+    CONCAT(CASE WHEN d.ine <> '' THEN '$baseURL' ELSE '' END, d.ine) AS ine,
+    CONCAT(CASE WHEN d.constancia_autorizacion <> '' THEN '$baseURL' ELSE '' END, d.constancia_autorizacion) AS constancia_autorizacion,
+    CONCAT(CASE WHEN d.constancia_servicio <> '' THEN '$baseURL' ELSE '' END, d.constancia_servicio) AS constancia_servicio
     FROM deportistas AS d
     INNER JOIN ciclos AS c ON d.id_ciclo = c.id
     INNER JOIN funciones AS f ON d.id_funcion = f.id
