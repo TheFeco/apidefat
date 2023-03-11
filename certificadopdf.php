@@ -77,6 +77,8 @@ if($cct != 0){
     $consulta .= "AND d.cct = '$cct' "; 
 }
 
+$consulta .= "ORDER BY d.id_rama, d.id_categoria, d.id_peso, d.id_prueba"; 
+print_r($consulta);
 $resultado = $conexion->prepare($consulta);
 $resultado->execute();
 if($resultado->rowCount() >= 1){
@@ -161,7 +163,7 @@ $mpdf->SetHeader('
 $mpdf->SetFooter('
 <div id="inner2">
     <h3 class="centerText">______________________________________________</h3>		
-    <h3 class="centerText">Titular de Educación Física en el Estado</h3>	
+    <h3 class="centerText">Director</h3>	
     <h3 class="centerText">Nombre, Firma y Sello</h3>
 </div>');
 $mpdf->SetColumns($colums);
