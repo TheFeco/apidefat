@@ -20,7 +20,7 @@ class deportistas extends conexion {
 
             $query = "SELECT d.id_usuairo AS id_zona, d.escuela, d.cct, 
             CASE WHEN turno = 1 THEN 'Matutino' 
-                WHEN turno = 2 THEN 'vespertino' 
+                WHEN turno = 2 THEN 'Vespertino' 
                 WHEN turno = 3 THEN 'Nocturno'
                 WHEN turno = 4 THEN 'Discontinuo'
                 WHEN turno = 5 THEN 'Continuo'
