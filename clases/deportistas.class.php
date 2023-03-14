@@ -18,7 +18,14 @@ class deportistas extends conexion {
         $arrayToken =   $this->buscarToken();
         if($arrayToken){
 
-            $query = "SELECT d.id_usuairo AS id_zona, d.escuela, d.cct, CASE WHEN turno = 1 THEN 'Matutino' WHEN turno = 2 THEN 'vespertino' END AS turno, d.id_ciclo, c.nombre AS ciclo, d.id_funcion, f.nombre AS funcion, dp.nombre AS deporte, d.id_deporte, d.id_rama, ramas.nombre AS rama, d.id_categoria, d.id_peso, d.id_prueba 
+            $query = "SELECT d.id_usuairo AS id_zona, d.escuela, d.cct, 
+            CASE WHEN turno = 1 THEN 'Matutino' 
+                WHEN turno = 2 THEN 'vespertino' 
+                WHEN turno = 3 THEN 'Nocturno'
+                WHEN turno = 4 THEN 'Discontinuo'
+                WHEN turno = 5 THEN 'Continuo'
+            END AS turno,
+            d.id_ciclo, c.nombre AS ciclo, d.id_funcion, f.nombre AS funcion, dp.nombre AS deporte, d.id_deporte, d.id_rama, ramas.nombre AS rama, d.id_categoria, d.id_peso, d.id_prueba 
             FROM deportistas AS d 
             INNER JOIN ciclos AS c ON (d.id_ciclo = c.id) 
             INNER JOIN funciones AS f  ON (d.id_funcion = f.id) 

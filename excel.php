@@ -14,9 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     $consulta = "SELECT d.folio, UPPER(d.nombre) AS nombre, UPPER(d.apellidos) AS apellidos, d.curp,
     DATE_FORMAT(d.fh_nacimiento, '%d/%m/%Y') AS fh_nacimiento, d.cct, d.escuela, d.zona, 
-    CASE WHEN turno = 1 THEN 'Matutino'
-         WHEN turno = 2 THEN 'Vespertino' 
-    END AS turno, c.nombre AS ciclo, m.nombre AS municipio, f.nombre AS funcion,
+    CASE WHEN turno = 1 THEN 'Matutino' 
+         WHEN turno = 2 THEN 'vespertino' 
+         WHEN turno = 3 THEN 'Nocturno'
+         WHEN turno = 4 THEN 'Discontinuo'
+         WHEN turno = 5 THEN 'Continuo'
+    END AS turno,
+    c.nombre AS ciclo, m.nombre AS municipio, f.nombre AS funcion,
     dp.nombre AS deporte, r.nombre AS rama, cat.nombre AS categoria, 
     peso.nombre AS peso, pruebas.nombre AS prueba,
     CONCAT(CASE WHEN d.curp_pdf <> '' THEN '$baseURL' ELSE '' END, d.curp_pdf) AS curp_pdf,

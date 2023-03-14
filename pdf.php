@@ -17,7 +17,14 @@ if($_POST['METHOD']=='POST'){
     $cct = isset($_POST['cct']) ? $_POST['cct'] : 0;
 
     //Consultas de Mysql que trae
-    $consulta = "SELECT d.folio, d.nombre, d.apellidos, d.curp, d.foto,DATE_FORMAT(d.fh_nacimiento,'%d/%m/%Y') AS fh_nacimeinto, d.cct, d.escuela, d.zona, CASE WHEN turno = 1 THEN 'Matutino' WHEN turno = 2 THEN 'vespertino' END AS turno,c.nombre AS ciclo, m.nombre AS municipio, f.nombre AS funcion, dp.nombre AS deporte, r.nombre AS rama, cat.nombre AS categoria, peso.nombre AS peso, pruebas.nombre AS prueba, CONCAT_WS(':, ', cat.nombre,peso.nombre,pruebas.nombre) AS array_pruebas
+    $consulta = "SELECT d.folio, d.nombre, d.apellidos, d.curp, d.foto,DATE_FORMAT(d.fh_nacimiento,'%d/%m/%Y') AS fh_nacimeinto, d.cct, d.escuela, d.zona, 
+    CASE WHEN turno = 1 THEN 'Matutino' 
+         WHEN turno = 2 THEN 'vespertino' 
+         WHEN turno = 3 THEN 'Nocturno'
+         WHEN turno = 4 THEN 'Discontinuo'
+         WHEN turno = 5 THEN 'Continuo'
+    END AS turno,
+    c.nombre AS ciclo, m.nombre AS municipio, f.nombre AS funcion, dp.nombre AS deporte, r.nombre AS rama, cat.nombre AS categoria, peso.nombre AS peso, pruebas.nombre AS prueba, CONCAT_WS(':, ', cat.nombre,peso.nombre,pruebas.nombre) AS array_pruebas
     FROM deportistas AS d 
     INNER JOIN ciclos AS c ON (d.id_ciclo = c.id) 
     INNER JOIN funciones AS f  ON (d.id_funcion = f.id) 
