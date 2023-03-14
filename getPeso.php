@@ -24,7 +24,6 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
         
         //Traemos todas las ramas
         $consulta = "SELECT p.id, p.nombre FROM deportes_peso AS pp INNER JOIN peso AS p ON (pp.id_peso = p.id) WHERE pp.id_deporte = $id_deporte AND pp.id_nivel = $id_nivel AND pp.id_rama = $id_rama ORDER BY id";
-        // die($consulta);
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
         if($resultado->rowCount() >= 1){
