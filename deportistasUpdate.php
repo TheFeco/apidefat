@@ -11,9 +11,9 @@ $_deportistas =  new deportistas;
 
 if($_SERVER['REQUEST_METHOD'] == "GET"){
 
-    if(isset($_GET['id'])){
-        $id_deportista = $_GET['id'];
-        $id_deportista = $_GET['token'];
+    if(isset($_GET['id_deportista'])){
+        $id_deportista = $_GET['id_deportista'];
+        $token = $_GET['token'];
         $datosDeportista = $_deportistas->obtenerById($id_deportista,$token);
         header("Content-Type: application/json");
         echo json_encode($datosDeportista);

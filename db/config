@@ -2,7 +2,7 @@
     "conexion":{
         "server"    :   "localhost",
         "user"      :   "root",
-        "password"  :   "t3cnolog14",
+        "password"  :   "",
         "database"  :   "defat",
         "port"      :   "3306"
 
