@@ -4,9 +4,6 @@ $objeto = new Conexion();
 $conexion = $objeto->Conectar();
 header('Access-Control-Allow-Origin: *');
 
-print_r("EStemen");
-die();
-
 // Función para subir el archivo y devolver el nombre del archivo
 function subirArchivo($inputName, $id_deportista, $isImage = false) {
     if (isset($_FILES[$inputName])) {
