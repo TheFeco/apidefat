@@ -68,7 +68,7 @@ if ($_POST['METHOD'] == 'POST') {
     }
 
     // Remover la última coma y agregar la cláusula WHERE
-    $query = rtrim($query, ", ") . " WHERE id_deportista=$id_deportista";
+    $query = rtrim($query, ", ") . " WHERE id=$id_deportista";
 
     $statement = $conexion->prepare($query);
     $statement->execute();
