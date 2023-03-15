@@ -20,7 +20,7 @@ function subirArchivo($inputName, $id_deportista, $isImage = false) {
         }
 
         move_uploaded_file($file['tmp_name'], $filepath);
-        return $nombreArchivo;
+        return $filepath;
     } else {
         return null;
     }
