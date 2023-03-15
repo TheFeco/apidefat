@@ -40,6 +40,14 @@ if ($_POST['METHOD'] == 'POST') {
     $constancia_servicio = subirArchivo("cocnstancia_servicio", $id_deportista);
     $constanciaEstudio = subirArchivo("constancia_estudio", $id_deportista);
 
+    print_r($foto);
+    print_r($curp_pdf);
+    print_r($cert_medico);
+    print_r($carta_responsiva);
+    print_r($ine);
+    print_r($constancia_autorizacion);
+    print_r($constanciaEstudio);
+    die();
     $query = "UPDATE deportistas SET ";
 
     if ($foto) {
