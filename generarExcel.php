@@ -30,8 +30,8 @@ if($_POST['METHOD']=='POST'){
     CONCAT(CASE WHEN d.carta_responsiva <> '' THEN '$baseURL' ELSE '' END, d.carta_responsiva) AS carta_responsiva,
     CONCAT(CASE WHEN d.ine <> '' THEN '$baseURL' ELSE '' END, d.ine) AS ine,
     CONCAT(CASE WHEN d.constancia_autorizacion <> '' THEN '$baseURL' ELSE '' END, d.constancia_autorizacion) AS constancia_autorizacion,
-    CONCAT(CASE WHEN d.constancia_servicio <> '' THEN '$baseURL' ELSE '' END, d.constancia_servicio) AS constancia_servicio
-
+    CONCAT(CASE WHEN d.constancia_servicio <> '' THEN '$baseURL' ELSE '' END, d.constancia_servicio) AS constancia_servicio,
+    user.usuario
     FROM deportistas AS d 
     INNER JOIN ciclos AS c ON (d.id_ciclo = c.id) 
     INNER JOIN funciones AS f  ON (d.id_funcion = f.id) 
@@ -41,6 +41,7 @@ if($_POST['METHOD']=='POST'){
     LEFT JOIN categorias AS cat ON ( d.id_categoria = cat.id)
     LEFT JOIN peso ON (d.id_peso = peso.id)
     LEFT JOIN pruebas ON (d.id_prueba = pruebas.id)
+    INNER JOIN usuarios AS user (d.usuarios = user.id)
     WHERE d.id_usuairo = '$id_usuario'
     AND d.id_ciclo = '$id_ciclo'
     AND d.id_funcion = '$id_funcion' 
