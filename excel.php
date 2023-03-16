@@ -39,7 +39,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     LEFT JOIN categorias AS cat ON d.id_categoria = cat.id
     LEFT JOIN peso ON d.id_peso = peso.id
     LEFT JOIN pruebas ON d.id_prueba = pruebas.id
-    INNER JOIN usuarios AS user ON (d.id_usuairo = user.id)";
+    INNER JOIN usuarios AS user ON (d.id_usuairo = user.id)
+    WHERE d.id_usuairo NOT IN ( 35,38 )
+    ORDER BY user.id";
 
     $resultado = $conexion->prepare($consulta);
     $resultado->execute();
