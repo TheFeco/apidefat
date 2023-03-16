@@ -41,7 +41,7 @@ if($_POST['METHOD']=='POST'){
     LEFT JOIN categorias AS cat ON ( d.id_categoria = cat.id)
     LEFT JOIN peso ON (d.id_peso = peso.id)
     LEFT JOIN pruebas ON (d.id_prueba = pruebas.id)
-    INNER JOIN usuarios AS user (d.usuarios = user.id)
+    INNER JOIN usuarios AS user (d.id_usuairo = user.id)
     WHERE d.id_usuairo = '$id_usuario'
     AND d.id_ciclo = '$id_ciclo'
     AND d.id_funcion = '$id_funcion' 
