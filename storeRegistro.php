@@ -18,11 +18,11 @@ if($_POST['METHOD']=='POST'){
     $municipio     = $_POST["municipio"];
     $ciclo         = $_POST["ciclo"];
     $funcion       = $_POST["funcion"];
-    $deporte       = isset($_POST["deporte"]) ? $_POST["deporte"] : 0;
-    $rama          = isset($_POST["rama"]) ? $_POST["rama"] : 0;
-    $categoria     = isset($_POST["categoria"]) ? $_POST["categoria"] : 0;
-    $peso          = isset($_POST["peso"]) ? $_POST["peso"] : 0;
-    $prueba        = isset($_POST["prueba"]) ? $_POST["prueba"] : 0;
+    $deporte        = !empty($_POST["deporte"]) ? $_POST["deporte"] : 0;
+    $rama           = !empty($_POST["rama"]) ? $_POST["rama"] : 0;
+    $categoria      = !empty($_POST["categoria"]) ? $_POST["categoria"] : 0;
+    $peso           = !empty($_POST["peso"]) ? $_POST["peso"] : 0;
+    $prueba         = !empty($_POST["prueba"]) ? $_POST["prueba"] : 0;
 
     $id_usuario    = $_POST["usuario"];
 
