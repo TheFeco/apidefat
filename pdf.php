@@ -79,7 +79,7 @@ if($_POST['METHOD']=='POST'){
         $html.='
         
         <div class="gafete">
-            <img src="imagenes/gafete.jpg" />
+            <img src="imagenes/gafete.png" />
         </div>
     
     
