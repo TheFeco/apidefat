@@ -88,9 +88,9 @@ if ($_POST['METHOD'] == 'POST') {
 
     $consulta .= "ORDER BY d.id_rama, d.id_categoria, d.id_peso, d.id_prueba";
 
-    echo "Consulta SQL: <br>";
-    echo $consulta;
-    die();
+    //echo "Consulta SQL: <br>";
+    //echo $consulta;
+    //die();
 
     $resultado = $conexion->prepare($consulta);
     $resultado->execute();
