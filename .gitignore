@@ -1,5 +1,5 @@
 # db/conexion.php
-db/config
+./db/config
 img/
 files/
 vendor/

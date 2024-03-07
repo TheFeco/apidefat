@@ -18,7 +18,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
         LEFT JOIN ramas  AS r ON (dp.id_rama = r.id)
         WHERE dp.id_usuairo = '$id' 
         GROUP BY dp.escuela, dp.cct, dp.id_ciclo, c.nombre, dp.id_funcion, f.nombre, dp.id_deporte, d.nombre, dp.id_rama, r.nombre
-        ORDER BY c.nombre, f.nombre DESC
+        ORDER BY dp.id_ciclo, c.nombre, f.nombre DESC
         ";
         
         $resultado = $conexion->prepare($consulta);
