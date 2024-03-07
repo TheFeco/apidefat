@@ -26,11 +26,11 @@ if ($_POST['METHOD'] == 'POST') {
     LEFT JOIN ramas ON (d.id_rama = ramas.id) 
     WHERE d.id_usuairo = :id_usuario AND c.id = :ciclo AND id_funcion = :funcion";
 
-    $params = ['id_usuario' => $usuario, 'ciclo' => $ciclo, 'funcion' => $funcion];
+    $params = ['id_usuario' => $usuario, 'ciclo' => $id_ciclos, 'funcion' => $id_funciones];
 
     $filters = [
-        'deporte' => 'AND id_deporte = :deporte',
-        'rama' => 'AND id_rama = :rama',
+        'deporte' => 'AND id_deporte = :id_deportes',
+        'rama' => 'AND id_rama = :id_ramas',
         'categoria' => 'AND id_categoria = :categoria',
         'peso' => 'AND id_peso = :peso',
         'prueba' => 'AND id_prueba = :prueba'
