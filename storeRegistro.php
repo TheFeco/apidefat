@@ -10,7 +10,7 @@ if ($_POST['METHOD'] == 'POST') {
     //exit;
     //die();
     unset($_POST['METHOD']);
-    $campos = ['curp', 'nombre', 'apellidos', 'fh_nacimiento', 'cct', 'escuela', 'id_nivel', 'turno', 'zona', 'municipio', 'ciclo', 'funcion', 'usuario'];
+    $campos = ['curp', 'nombre', 'apellidos', 'fh_nacimiento', 'cct', 'escuela', 'nivel', 'turno', 'zona', 'municipio', 'ciclo', 'funcion', 'usuario'];
     $valores = [];
     foreach ($campos as $campo) {
         $valores[$campo] = $_POST[$campo] ?? '';
@@ -31,7 +31,7 @@ if ($_POST['METHOD'] == 'POST') {
         }
     }
 
-    $query = "INSERT INTO deportistas (curp, nombre, apellidos, fh_nacimiento, cct, escuela, id_nivel, turno, zona, id_municipio, id_ciclo, id_funcion, id_deporte, id_rama, id_categoria, id_peso, id_prueba, id_prueba2, id_usuairo, acta_nacimiento, curp_pdf, cert_medico, carta_responsiva, ine, constancia_autorizacion, constancia_servicio, constanciaEstudio) VALUES (:curp, :nombre, :apellidos, :fh_nacimiento, :cct, :escuela, :id_nivel, :turno, :zona, :municipio, :ciclo, :funcion, :deporte, :rama, :categoria, :peso, :prueba, :prueba2, :usuario, :actNacimiento, :curpPdf, :cerMedico, :cartaResponsiva, :ine, :constanciaAutorizacion, :constanciaServicio, :constanciaEstudio)";
+    $query = "INSERT INTO deportistas (curp, nombre, apellidos, fh_nacimiento, cct, escuela, id_nivel, turno, zona, id_municipio, id_ciclo, id_funcion, id_deporte, id_rama, id_categoria, id_peso, id_prueba, id_prueba2, id_usuairo, acta_nacimiento, curp_pdf, cert_medico, carta_responsiva, ine, constancia_autorizacion, constancia_servicio, constanciaEstudio) VALUES (:curp, :nombre, :apellidos, :fh_nacimiento, :cct, :escuela, :nivel, :turno, :zona, :municipio, :ciclo, :funcion, :deporte, :rama, :categoria, :peso, :prueba, :prueba2, :usuario, :actNacimiento, :curpPdf, :cerMedico, :cartaResponsiva, :ine, :constanciaAutorizacion, :constanciaServicio, :constanciaEstudio)";
 
     $stmt = $conexion->prepare($query);
     $ejecucionExitosa = $stmt->execute($valores);
