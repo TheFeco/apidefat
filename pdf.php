@@ -158,7 +158,7 @@ if($_POST['METHOD']=='POST'){
         if( $i % 2 == 0 ){
             $html.='
             <div class="gafete">
-                <img src="imagenes/gafete.jpg" />
+                <img src="imagenes/gafete.png" />
             </div>
             <div style="
             position: absolute; 
