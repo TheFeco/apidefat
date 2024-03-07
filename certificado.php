@@ -88,12 +88,16 @@ if ($_POST['METHOD'] == 'POST') {
 
     $consulta .= "ORDER BY d.id_rama, d.id_categoria, d.id_peso, d.id_prueba";
 
+    echo "Consulta SQL: <br>";
+    echo $consulta;
+    die();
+
     $resultado = $conexion->prepare($consulta);
     $resultado->execute();
     if ($resultado->rowCount() >= 1) {
         $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
     } else {
-        $d = array('menssage' => 'No se encontro ningun dato22.');
+        $d = array('menssage' => 'No se encontro ningun dato.');
         header("HTTP/1.1 500 error");
         return print json_encode($d);
         $conexion = NULL;
