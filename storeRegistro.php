@@ -15,11 +15,11 @@ if ($_POST['METHOD'] == 'POST') {
     foreach ($campos as $campo) {
         $valores[$campo] = $_POST[$campo] ?? '';
     }
-    $valores['deporte'] = $_POST['deporte'] ?? 0;
-    $valores['rama'] = $_POST['rama'] ?? 0;
-    $valores['categoria'] = $_POST['categoria'] ?? 0;
-    $valores['peso'] = $_POST['peso'] ?? 0;
-    $valores['prueba'] = $_POST['prueba'] ?? 0;
+    $valores['deporte'] = isset($_POST['deporte']) && $_POST['deporte'] !== '' ? $_POST['deporte'] : 0;
+    $valores['rama'] = isset($_POST['rama']) && $_POST['rama'] !== '' ? $_POST['rama'] : 0;
+    $valores['categoria'] = isset($_POST['categoria']) && $_POST['categoria'] !== '' ? $_POST['categoria'] : 0;
+    $valores['peso'] = isset($_POST['peso']) && $_POST['peso'] !== '' ? $_POST['peso'] : 0;
+    $valores['prueba'] = isset($_POST['prueba']) && $_POST['prueba'] !== '' ? $_POST['prueba'] : 0;
     $valores['prueba2'] = isset($_POST['prueba2']) && $_POST['prueba2'] !== '' ? $_POST['prueba2'] : 0;
 
     $archivos = ['actNacimiento', 'curpPdf', 'cerMedico', 'cartaResponsiva', 'ine', 'constanciaAutorizacion', 'constanciaServicio', 'constanciaEstudio'];
