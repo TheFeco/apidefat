@@ -20,7 +20,7 @@ if ($_POST['METHOD'] == 'POST') {
     $valores['categoria'] = $_POST['categoria'] ?? 0;
     $valores['peso'] = $_POST['peso'] ?? 0;
     $valores['prueba'] = $_POST['prueba'] ?? 0;
-    $valores['prueba2'] = $_POST['prueba2'] ?? 0;
+    $valores['prueba2'] = $_POST['prueba2'] !== '' ? $_POST['prueba2'] : 0;
 
     $archivos = ['actNacimiento', 'curpPdf', 'cerMedico', 'cartaResponsiva', 'ine', 'constanciaAutorizacion', 'constanciaServicio', 'constanciaEstudio'];
     foreach ($archivos as $archivo) {
