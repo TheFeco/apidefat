@@ -3,6 +3,10 @@ table td, table td * {
     vertical-align: top; padding:1em 1em;
 }
 
+.espacio {
+    font-size: 12px;
+}
+
 .tdptruebas {
     border:1px solid #333;
     font-size: 12px;
@@ -24,7 +28,7 @@ p { font-size: 80%; line-height: 18px; padding-right: 3em; }
 li {list-style:none;}
 
 /* //-- section styles -- */
-.job { position: relative; }
+.job { position: relative;  font-size: 12px;}
 .job h4 { position: absolute; top: 0.35em; right: 0 }
 .job p { margin: 15px 0 15px 0; }
 
