@@ -21,7 +21,7 @@ $id_peso = isset($_POST['peso']) ? $_POST['peso'] : 0;
 $id_prueba = isset($_POST['prueba']) ? $_POST['prueba'] : 0;
 
 // Variables para el pdf
-$colums = 3;
+$colums = 2;
 
 //obtenemos el nombre del ciclo
 $ciclo = "";
