@@ -8,7 +8,12 @@ header('Access-Control-Allow-Origin: *');
 
 if ($_POST['METHOD'] == 'POST') {
     unset($_POST['METHOD']);
-    extract($_POST);
+
+    $usuario = $_POST['usuario'] ?? null;
+    $id_ciclo = $_POST['id_ciclo'] ?? null;
+    $id_funcion = $_POST['id_funcion'] ?? null;
+    $id_deporte = $_POST['id_deporte'] ?? null;
+    $id_rama = $_POST['id_rama'] ?? null;
 
     $query = "SELECT d.id_usuairo AS id_zona, d.escuela, d.cct, 
     CASE 
@@ -24,39 +29,35 @@ if ($_POST['METHOD'] == 'POST') {
     INNER JOIN funciones AS f ON (d.id_funcion = f.id) 
     LEFT JOIN deportes AS dp ON (d.id_deporte = dp.id) 
     LEFT JOIN ramas ON (d.id_rama = ramas.id) 
-    WHERE d.id_usuairo = :id_usuario AND c.id = :ciclo AND id_funcion = :funcion";
+    WHERE d.id_usuairo = $usuario AND c.id = $id_ciclo AND id_funcion = $id_funcion";
 
-    $params = ['id_usuario' => $usuario, 'ciclo' => $id_ciclo, 'funcion' => $id_funcion];
+    if (!empty($id_deporte)) {
+        $query .= " AND id_deporte = $id_deporte";
+    }
 
-    $filters = [
-        'deporte' => 'AND id_deporte = :id_deporte',
-        'rama' => 'AND id_rama = :id_rama',
-        'categoria' => 'AND id_categoria = :categoria',
-        'peso' => 'AND id_peso = :peso',
-        'prueba' => 'AND id_prueba = :prueba'
-    ];
-
-    foreach ($filters as $key => $filter) {
-        if (!empty($$key)) {
-            $query .= " $filter";
-            $params[$key] = $$key;
-        }
+    if (!empty($id_rama)) {
+        $query .= " AND id_rama = $id_rama";
     }
 
     $query .= " GROUP BY d.id_usuairo, d.escuela, d.cct, turno, d.id_ciclo, c.nombre, d.id_funcion, f.nombre, dp.nombre, d.id_deporte, d.id_rama, ramas.nombre";
 
     // Imprime la consulta para depuración
-    /*echo "Consulta SQL: " . $query . "\n";
-    echo "Parámetros: ";
-    print_r($params);
-    echo "\n";*/
+    //echo "Consulta SQL: " . $query . "\n";
+    // echo "Consulta SQL: " . $query . "\n";
+    // echo "Parámetros: ";
+    // echo "\n";
 
     $stmt = $conexion->prepare($query);
-    $stmt->execute($params);
+    $stmt->execute();
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    header("HTTP/1.1 200 OK");
-    return print json_encode(['data' => $data]);
+    // print_r($data);
     $conexion = null;
+    if (empty($data)) {
+        header("HTTP/1.1 404 Not Found");
+        print json_encode(['message' => 'No se encontraron datos']);
+    } else {
+        header("HTTP/1.1 200 OK");
+        print json_encode(['data' => $data]);
+    }
 }
 ?>
