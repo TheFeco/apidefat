@@ -30,7 +30,7 @@ if($_POST['METHOD']=='POST'){
          WHEN turno = 4 THEN 'Discontinuo'
          WHEN turno = 5 THEN 'Continuo'
     END AS turno,
-    c.nombre AS ciclo, m.nombre AS municipio, f.nombre AS funcion, dp.nombre AS deporte, r.nombre AS rama, cat.nombre AS categoria, peso.nombre AS peso, pruebas.nombre AS prueba,
+    c.nombre AS ciclo, m.nombre AS municipio, f.nombre AS funcion, dp.nombre AS deporte, r.nombre AS rama, cat.nombre AS categoria, peso.nombre AS peso, pruebas.nombre AS prueba, prueba2.nombre as prueba2
     CONCAT(CASE WHEN d.curp_pdf <> '' THEN '$baseURL' ELSE '' END, d.curp_pdf) AS curp_pdf,
     CONCAT(CASE WHEN d.cert_medico <> '' THEN '$baseURL' ELSE '' END, d.cert_medico) AS cert_medico,
     CONCAT(CASE WHEN d.carta_responsiva <> '' THEN '$baseURL' ELSE '' END, d.carta_responsiva) AS carta_responsiva,
@@ -46,6 +46,7 @@ if($_POST['METHOD']=='POST'){
     LEFT JOIN categorias AS cat ON ( d.id_categoria = cat.id)
     LEFT JOIN peso ON (d.id_peso = peso.id)
     LEFT JOIN pruebas ON (d.id_prueba = pruebas.id)
+    LEFT JOIN pruebas2 ON (d.id_prueba2 = pruebas2.id)
     WHERE d.id_usuairo = '$id_usuario'
     AND d.id_ciclo = '$id_ciclo'
     AND d.id_funcion = '$id_funcion' 
