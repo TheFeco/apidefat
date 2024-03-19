@@ -51,7 +51,7 @@ CASE WHEN turno = 1 THEN 'Matutino'
          WHEN turno = 4 THEN 'Discontinuo'
          WHEN turno = 5 THEN 'Continuo'
     END AS turno,
-c.nombre AS ciclo, m.nombre AS municipio, f.nombre AS funcion, dp.nombre AS deporte, r.nombre AS rama, cat.nombre AS categoria, peso.nombre AS peso, pruebas.nombre AS prueba, CONCAT_WS(':, ', cat.nombre,peso.nombre,pruebas.nombre) AS array_pruebas
+c.nombre AS ciclo, m.nombre AS municipio, f.nombre AS funcion, dp.nombre AS deporte, r.nombre AS rama, cat.nombre AS categoria, peso.nombre AS peso, pruebas.nombre AS prueba, CONCAT_WS(':, ', cat.nombre,peso.nombre,pruebas.nombre, pruebas2.nombre) AS array_pruebas
 FROM deportistas AS d 
 INNER JOIN ciclos AS c ON (d.id_ciclo = c.id) 
 INNER JOIN funciones AS f  ON (d.id_funcion = f.id) 
@@ -61,6 +61,7 @@ LEFT JOIN ramas AS r ON( d.id_rama = r.id )
 LEFT JOIN categorias AS cat ON ( d.id_categoria = cat.id)
 LEFT JOIN peso ON (d.id_peso = peso.id)
 LEFT JOIN pruebas ON (d.id_prueba = pruebas.id)
+LEFT JOIN pruebas AS pruebas2 ON (d.id_prueba2 = pruebas2.id)
 WHERE d.id_usuairo = '$id_usuario'
 AND d.id_ciclo = '$id_ciclo'
 AND d.id_funcion = '$id_funcion' 
