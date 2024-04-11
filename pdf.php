@@ -56,6 +56,8 @@ if($_POST['METHOD']=='POST'){
     if($cct != 0){
         $consulta .= "AND d.cct = '$cct' "; 
     }
+    
+    $consulta .= "ORDER BY dp.id, r.id";
 
     $resultado = $conexion->prepare($consulta);
     $resultado->execute();
