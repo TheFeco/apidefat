@@ -50,7 +50,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
     $ciclos=$resultado->fetchAll(PDO::FETCH_ASSOC);
     
     //Traemos todos los Deportes
-    $consulta = "SELECT id, nombre FROM deportes ORDER BY id";
+    $consulta = "SELECT id, nombre FROM deportes WHERE is_active = 1 ORDER BY id";
     $resultadoDeportes = $conexion->prepare($consulta);
     $resultadoDeportes->execute();
     if($resultadoDeportes->rowCount() >= 1){
@@ -61,7 +61,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){
         $deportes=null;
     }
     //Traemos todas las ramas
-    $consultaRamas = "SELECT id, nombre FROM ramas ORDER BY id";
+    $consultaRamas = "SELECT id, nombre FROM ramas WHERE is_active = 1 ORDER BY id";
     $resultadoRamas = $conexion->prepare($consultaRamas);
     $resultadoRamas->execute();
     if($resultadoRamas->rowCount() >= 1){
