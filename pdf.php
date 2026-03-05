@@ -1,4 +1,5 @@
 <?php
+ini_set("pcre.backtrack_limit", "5000000");
 include_once 'db/conexion.php';
 $objeto = new Conexion();
 $conexion = $objeto->Conectar();
