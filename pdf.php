@@ -160,7 +160,7 @@ if($_POST['METHOD']=='POST'){
         left: 128px;" 
         class="foto">
     
-            <img class="fotoimg" src="'.$row["foto"].'" />
+            <img class="fotoimg" src="'.__DIR__.'/'.$row["foto"].'" />
     
         </div>
     
@@ -236,7 +236,7 @@ if($_POST['METHOD']=='POST'){
             left: 128px;" 
             class="foto">
         
-                <img class="fotoimg" src="'.$row["foto"].'" />
+                <img class="fotoimg" src="'.__DIR__.'/'.$row["foto"].'" />
         
             </div>    
             ';
@@ -254,6 +254,7 @@ if($_POST['METHOD']=='POST'){
     $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8',
                             'format' => [180, 270],
                         ]);
+    $mpdf->showImageErrors = true;
     $stylesheet = file_get_contents('gafete.css');
     $mpdf->WriteHTML($stylesheet,1);
     // $mpdf->SetColumns(2, 'J', 2);
