@@ -85,6 +85,19 @@ if($_POST['METHOD']=='POST'){
     }
 
     foreach ($data as $row){
+        // Convertir la foto a base64 para evitar que mPDF se confunda con rutas
+        $ruta_foto_absoluta = __DIR__ . '/' . $row["foto"];
+        $imagen_src = $row["foto"]; // fallback
+        if (!empty($row["foto"]) && file_exists($ruta_foto_absoluta)) {
+            $ext = strtolower(pathinfo($ruta_foto_absoluta, PATHINFO_EXTENSION));
+            if($ext == 'jpg') $ext = 'jpeg';
+            $data_img = file_get_contents($ruta_foto_absoluta);
+            if ($data_img !== false) {
+                $base64 = base64_encode($data_img);
+                $imagen_src = 'data:image/' . $ext . ';base64,' . $base64;
+            }
+        }
+
     // for ($i=0; $i < $rows ; $i++) { 
         # code...
         if( $i % 2 != 0 ){
@@ -160,7 +173,7 @@ if($_POST['METHOD']=='POST'){
         left: 128px;" 
         class="foto">
     
-            <img class="fotoimg" src="'.__DIR__.'/'.$row["foto"].'" />
+            <img class="fotoimg" src="'.$imagen_src.'" />
     
         </div>
     
@@ -236,7 +249,7 @@ if($_POST['METHOD']=='POST'){
             left: 128px;" 
             class="foto">
         
-                <img class="fotoimg" src="'.__DIR__.'/'.$row["foto"].'" />
+                <img class="fotoimg" src="'.$imagen_src.'" />
         
             </div>    
             ';
