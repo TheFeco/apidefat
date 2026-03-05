@@ -74,6 +74,16 @@ if($_POST['METHOD']=='POST'){
 
     $html = '';
     $i = 0;
+
+    $gafete_img = 'imagenes/gafete.jpg';
+    if (file_exists('imagenes/gafete.png')) {
+        $gafete_img = 'imagenes/gafete.png';
+    } elseif (file_exists('imagenes/gafete.jpeg')) {
+        $gafete_img = 'imagenes/gafete.jpeg';
+    } elseif (file_exists('imagenes/gafete.jpg')) {
+        $gafete_img = 'imagenes/gafete.jpg';
+    }
+
     foreach ($data as $row){
     // for ($i=0; $i < $rows ; $i++) { 
         # code...
@@ -81,7 +91,7 @@ if($_POST['METHOD']=='POST'){
         $html.='
         
         <div class="gafete">
-            <img src="imagenes/gafete.jpg" />
+            <img src="'.$gafete_img.'" />
         </div>
     
     
@@ -160,7 +170,7 @@ if($_POST['METHOD']=='POST'){
         if( $i % 2 == 0 ){
             $html.='
             <div class="gafete">
-                <img src="imagenes/gafete.jpg" />
+                <img src="'.$gafete_img.'" />
             </div>
             <div style="
             position: absolute; 
