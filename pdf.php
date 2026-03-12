@@ -1,5 +1,5 @@
 <?php
-ini_set("pcre.backtrack_limit", "5000000");
+ini_set("pcre.backtrack_limit", "10000000");
 include_once 'db/conexion.php';
 $objeto = new Conexion();
 $conexion = $objeto->Conectar();
@@ -72,6 +72,15 @@ if($_POST['METHOD']=='POST'){
         return print json_encode($d);
         $conexion = NULL;
     }
+
+    require_once __DIR__ . '/vendor/autoload.php';
+    $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8',
+                            'format' => [180, 270],
+                        ]);
+    $mpdf->showImageErrors = true;
+    $stylesheet = file_get_contents('gafete.css');
+    $mpdf->WriteHTML($stylesheet,1);
+    // $mpdf->SetColumns(2, 'J', 2);
 
     $html = '';
     $i = 0;
@@ -254,27 +263,19 @@ if($_POST['METHOD']=='POST'){
         
             </div>    
             ';
-            if($i == $rows){
-                $html.='<div class="page_break"></div>';
+        }
+
+        // Write HTML and add page break after every 2 gafetes (or the last one)
+        if ($i % 2 != 0 || ($i + 1) == $rows) {
+            $mpdf->WriteHTML($html);
+            $html = '';
+            if (($i + 1) < $rows) {
+                $mpdf->AddPage();
             }
-            
         }
         $i++;
     }
 
-
-
-    require_once __DIR__ . '/vendor/autoload.php';
-    $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8',
-                            'format' => [180, 270],
-                        ]);
-    $mpdf->showImageErrors = true;
-    $stylesheet = file_get_contents('gafete.css');
-    $mpdf->WriteHTML($stylesheet,1);
-    // $mpdf->SetColumns(2, 'J', 2);
-
-
-    $mpdf->WriteHTML($html);
 
     $name = 'gafete-' . md5(uniqid(mt_rand(), true)) . '.pdf';
     $filename = "files/tmp/";
